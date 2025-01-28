@@ -63,6 +63,9 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility" "DynamicScrollbars" 0
 
 Write-Output `n "Setting Windows 10/11 Display Options"
 
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name IsBatteryPercentageEnabled -ItemType DWORD -Value 1 -ErrorAction SilentlyContinue  #Show Battery % in Taskbar
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "IsBatteryPercentageEnabled" 1
+
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "AppsUseLightTheme" 0
 
