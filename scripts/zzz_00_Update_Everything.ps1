@@ -1,34 +1,33 @@
 #Disable Recall
-Dism /Online /Disable-Feature /Featurename:Recall
 Dism /Online /Get-Featureinfo /Featurename:Recall
+Dism /Online /Disable-Feature /Featurename:Recall
 
 #NVCleanstall (Updates Graphics Drivers)
-Write-Host `n
-Write-Host "Checking for Nvidia Driver Updates (if NVCleanstall is installed)..." `n
-$ErrorActionPreference = "silentlycontinue"
-Start $env:ProgramFiles\NVCleanstall\NVCleanstall.exe
-$ErrorActionPreference = "continue"
+Write-Host `n"Checking for Nvidia Driver Updates (if NVCleanstall is installed)..."
+try{Start $env:ProgramFiles\NVCleanstall\NVCleanstall.exe}
+catch{Write-Output "NVCleanstall is not installed."}
 
 #Updates Windows Store Apps
-Write-Host "Checking for Windows Store Updates..."
+Write-Host `n"Checking for Windows Store Updates..."
 Start ms-windows-store://downloadsandupdates -ErrorAction SilentlyContinue
 Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod -ErrorAction SilentlyContinue
 
 #Updates Windows
-Write-Host "Checking for Windows Updates..." `n
+Write-Host `n"Checking for Windows Updates..."
 Start-Process ms-settings:windowsupdate
 USOClient StartInteractiveScan
 
 #Update PowerToys
-Write-Host "Checking for PowerToys Updates..." `n
-Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.exe -Verb RunAs -ErrorAction SilentlyContinue
-Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.Update.exe -Verb RunAs -ErrorAction SilentlyContinue
+Write-Host `n"Checking for PowerToys Updates..."
+try{Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.exe -Verb RunAs
+Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.Update.exe -Verb RunAs}
+catch{Write-Output "PowerToys is not installed."}
 
 #Updates Other Programs
-Write-Host "Checking for Software Updates..." `n
+Write-Host `n"Checking for Software Updates..."
 winget upgrade
-Read-Host `n "Press enter to continue"
-Write-Host "To upgrade everything, run the following command:"
-Write-Host "winget upgrade --all --accept-source-agreements --accept-package-agreements" `n
-Write-Host "To upgrade an individual package, run:"
+
+Write-Host `n"To upgrade everything, run the following command:"
+Write-Host "winget upgrade --all --accept-source-agreements --accept-package-agreements"
+Write-Host `n"To upgrade an individual package, run:"
 Write-Host "winget upgrade <ID>"
