@@ -32,7 +32,7 @@ $apps = @(
     
     #Non-Windows UWP Apps
     "XP9M26RSCLNT88"           #Tree Size, for determining sizes of folders
-    "XPFCG5NRKXQPKT"           #Foxit PDF Reader
+    #"XPFCG5NRKXQPKT"           #Foxit PDF Reader
 
     #Email Clients
     #"Mozilla.Thunderbird"      #Mozilla Thunderbird Email Client
@@ -65,7 +65,7 @@ $apps = @(
     #"9WZDNCRFHWLH"             #HP Smart
 
     #Acer App
-    "9MZPX5WCBMWT"               #Control Center, gives Serial Number for Acer PCs
+    #"9MZPX5WCBMWT"               #Control Center, gives Serial Number for Acer PCs
 )
 
 foreach ($app in $apps) {
@@ -78,5 +78,7 @@ foreach ($app in $apps) {
 Write-Host "Opening Websites for Software with no Winget Packages"
 sleep 3
 Start-Process https://www.amd.com/en/support #AMD Software
+sleep 3
+Start-Process https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly
 #sleep 3
 #Start-Process https://www.thunderbird.net/en-US/thunderbird/all/?release=beta #Mozilla Thunderbird Beta
