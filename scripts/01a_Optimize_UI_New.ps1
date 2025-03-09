@@ -1,4 +1,4 @@
-# This will disable a lot of the visual effects in windows
+# This will disable a lot of the visual effects in Windows
 
 Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
 Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
@@ -9,6 +9,14 @@ do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 Write-Output `n "Adjust Appearance and Performance of Windows"
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" "VisualFXSetting" 2
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" "VisualFXSetting" 3
+
+Write-Output `n "Fixing Touchpad Options"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ScrollDirection -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" "ScrollDirection" 0
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name TapsEnabled -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" "TapsEnabled" 1
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Type DWORD -Value 0
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Value 4
 
 Write-Output `n "Apply MarkC's mouse acceleration fix"
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" "MouseSensitivity" "10"
