@@ -83,8 +83,8 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\P
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name EnableTransparency -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "EnableTransparency" 0
 
-#New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAL -PropertyType DWORD -Value 1                #Set Taskbar to Left (0) or Center (1) (Win 11)
-#Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarAL" 1
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAL -PropertyType DWORD -Value 1                #Set Taskbar to Left (0) or Center (1) (Win 11)
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarAL" 1
 
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_ShowClassicMode -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Start_ShowClassicMode" 1
@@ -135,7 +135,7 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name FontSmoothing -Value 
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ListviewShadow -Value 0
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Type BINARY -Name UserPreferencesMask -Value ([byte[]](0x90,
 0x12, 0x02, 0x80, 0x10, 0x00, 0x00, 0x00))
-Set-ItemProperty -Path "HKCU:\Control Panel\Cursors" -Name '(Default)' -Value "Windows Standard (extra large)" -Force
+#Set-ItemProperty -Path "HKCU:\Control Panel\Cursors" -Name '(Default)' -Value "Windows Default (large) (system scheme)" -Force #XL Mouse Cursor
 
 Write-Output `n "Adding 'End Task' Option To Right Click Menu"
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name TaskbarEndTask -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force

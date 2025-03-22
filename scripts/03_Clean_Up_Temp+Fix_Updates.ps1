@@ -12,7 +12,6 @@ Write-Host `n
 Write-Host "Removing System Files..." `n
 #sleep 30
 
-Remove-Item -Recurse -Force "$env:windir\SoftwareDistribution\*" -ErrorAction SilentlyContinue
 Remove-Item -Recurse -Force "$env:windir\temp\*" -ErrorAction SilentlyContinue
 
 Remove-Item -Recurse -Force "$env:SystemDrive\Windows.Old" -ErrorAction SilentlyContinue
@@ -30,6 +29,8 @@ Remove-Item -Recurse -Force "$env:windir\CCM\Inventory\Temp" -ErrorAction Silent
 Remove-Item -Recurse -Force "$env:windir\CCM\Logs\*" -ErrorAction SilentlyContinue
 Remove-Item -Recurse -Force "$env:windir\CCM\SystemTemp" -ErrorAction SilentlyContinue
 Remove-Item -Recurse -Force "$env:windir\CCM\Staging\*" -ErrorAction SilentlyContinue
+
+Remove-Item -Recurse -Force "$env:windir\SoftwareDistribution" -ErrorAction Continue
 
 Write-Host "Launching Disk Cleanup..." `n
 
