@@ -23,7 +23,8 @@ $apps = @(
     #"9PGW18NPBZV5"             #Minecraft Launcher, Doesn't work; Needs to be installed through Store/Xbox App
     
     #Caffiene
-    "ZhornSoftware.Caffeine"     #Keep Screen Awake
+    #"ZhornSoftware.Caffeine"     #Keep Screen Awake
+    ###Doesn't create start menu entry. See below for link
 
     #Rufus
     "Rufus.Rufus"                #Mounts ISOs
@@ -83,5 +84,7 @@ sleep 3
 Start-Process https://www.amd.com/en/support #AMD Software
 sleep 3
 Start-Process https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly
+sleep 3
+Start-Process https://www.zhornsoftware.co.uk/caffeine/index.html#download
 #sleep 3
 #Start-Process https://www.thunderbird.net/en-US/thunderbird/all/?release=beta #Mozilla Thunderbird Beta
