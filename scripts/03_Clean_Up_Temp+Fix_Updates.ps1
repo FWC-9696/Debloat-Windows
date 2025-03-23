@@ -12,33 +12,26 @@ Write-Host `n
 Write-Host "Removing System Files..." `n
 #sleep 30
 
-Remove-Item -Recurse -Force "$env:windir\temp\*" -ErrorAction SilentlyContinue
+$directory = @(
+    "$env:LOCALAPPDATA\Microsoft\Windows\INetCache\*"
+    "$env:windir\SoftwareDistribution\*"
+    )
 
-Remove-Item -Recurse -Force "$env:SystemDrive\Windows.Old" -ErrorAction SilentlyContinue
+    foreach ($directory in $directory) {
+    Get-ChildItem -Path $directory | Remove-Item -Force -Recurse
+    }
 
-Remove-Item -Recurse -Force "$env:TEMP" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:USERPROFILE\AppData\Local\Microsoft\Windows\INetCache\*" -ErrorAction SilentlyContinue
+    $top_directory = @(
+    "$env:LOCALAPPDATA\Microsoft\Windows\INetCache"
+    "$env:windir\SoftwareDistribution"
+    )
 
-Remove-Item -Recurse -Force "$env:SystemDrive\TEMP" -ErrorAction SilentlyContinue
-
-Remove-Item -Recurse -Force "$env:windir\CarbonBlack" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\CbsTemp" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\ccmcache" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\CCM\Temp" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\CCM\Inventory\Temp" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\CCM\Logs\*" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\CCM\SystemTemp" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:windir\CCM\Staging\*" -ErrorAction SilentlyContinue
-
-Remove-Item -Recurse -Force "$env:windir\SoftwareDistribution" -ErrorAction Continue
+    foreach ($top_directory in $top_directory) {
+    Remove-Item $top_directory -Recurse -Force
+    }
 
 Write-Host "Launching Disk Cleanup..." `n
 
 Start-Process "$env:windir\system32\cleanmgr.exe" -Verb RunAs -Wait
-
-#Write-Host "Checking for Windows Updates..." `n
-
-#Start-Process ms-settings:windowsupdate
-#USOClient StartInteractiveScan
 
 Write-Host "Done"
