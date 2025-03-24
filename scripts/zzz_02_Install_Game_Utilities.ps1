@@ -28,4 +28,6 @@ foreach ($app in $apps) {
 
     }
 
-    https://controller.dl.playstation.net/controller/lang/en/2100004.html #PlayStation Accessories, replaces "DualSense Firmware Updater"
+    Start-Process https://www.radmin-vpn.com/
+
+    Start-Process https://controller.dl.playstation.net/controller/lang/en/2100004.html #PlayStation Accessories, replaces "DualSense Firmware Updater"
