@@ -6,6 +6,7 @@ $apps = @(
     #Microsoft Tools & Apps
     "Microsoft.PowerShell"     #Latest Version of PowerShell
     "9NBLGGH4NNS1"             #Update Winget itself
+    "9n8mhtphngvv"             #Advanced Settings
     #"Microsoft.PowerToys"      #PowerToys
     "9P7KNL5RWT25"             #Microsoft Sysinternals Suite (Includes Process explorer & Other Tools)
     #"9MV0B5HZVK9Z"             #Xbox

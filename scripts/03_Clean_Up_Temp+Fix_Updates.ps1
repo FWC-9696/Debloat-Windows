@@ -10,7 +10,7 @@ get-service bits, wuauserv
 
 Write-Host `n
 Write-Host "Removing System Files..." `n
-#sleep 30
+
 
 $directory = @(
     "$env:LOCALAPPDATA\Microsoft\Windows\INetCache\*"
@@ -29,8 +29,10 @@ $directory = @(
     foreach ($top_directory in $top_directory) {
     Remove-Item $top_directory -Recurse -Force
     }
+Write-Host `n "If you encountered errors deleting files, remove $env:windir\SoftwareDistribution manually."
+sleep 5
 
-Write-Host "Launching Disk Cleanup..." `n
+Write-Host `n "Launching Disk Cleanup..." `n
 
 Start-Process "$env:windir\system32\cleanmgr.exe" -Verb RunAs -Wait
 

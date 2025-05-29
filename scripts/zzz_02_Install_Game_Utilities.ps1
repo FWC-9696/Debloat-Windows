@@ -19,6 +19,7 @@ $apps = @(
     "Radmin.VPN"                     #Radmin VPN (Replaces LogMeIn Hamachi or LAN)
     "Logitech.GHUB"                  #Logitech G Hub
     #"ViGEm.ViGEmBus"                 #Nefarius Gamepad Emulator, Subcomponent of DS4Windows
+    "MHNexus.HxD"                      #Hex editor
 )
 
 foreach ($app in $apps) {
