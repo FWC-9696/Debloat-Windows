@@ -9,7 +9,6 @@ catch{Write-Host "NVCleanstall is not installed."}
 
 #Updates Windows Store Apps
 Write-Host `n"Checking for Windows Store Updates..."
-Update-AppxPackage -Package *
 Start ms-windows-store://downloadsandupdates -ErrorAction SilentlyContinue
 
 #Updates Windows
