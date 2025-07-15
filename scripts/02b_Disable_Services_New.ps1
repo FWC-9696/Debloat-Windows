@@ -67,5 +67,9 @@ Set-Service XblAuthManager -StartupType Automatic -ErrorAction SilentlyContinue 
 taskmgr /0 /startup
 
 Write-Host `n
+Write-Host "Disabling auto-restart of apps on sign in"
+Set-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" "RestartApps" 0
+
+Write-Host `n
 Write-Host "Please Disable Unwanted Programs"
 Write-Host `n

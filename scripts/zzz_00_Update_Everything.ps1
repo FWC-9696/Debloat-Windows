@@ -30,6 +30,15 @@ Write-Host
 Write-Host "Checking for PowerToys Updates..."
 try{Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.Update.exe -Verb RunAs}
 catch{Write-Host "PowerToys is not installed."}
+Write-Host
+
+Write-Host "Checking for Edge Updates in the background..."
+Start-Process ${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe
+Write-Host
+
+Write-Host "Checking for Firefox Updates in the background..."
+try {Start-Process $env:ProgramFiles\Firefox*\updater.exe}
+catch{Write-Host "Firefox is not installed."}
 
 #Updates Other Programs
 Write-Host 

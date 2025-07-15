@@ -1,4 +1,9 @@
-Dism /Online /Disable-Feature /Featurename:Recall
-Dism /Online /Get-Featureinfo /Featurename:Recall
-
-#You may want to run this at every startup using Task Scheduler. It is not known if Microsoft will re-enable it after updates.
+#Disable Recall if Enabled. Developed using https://github.com/antonflor/RecallManager/blob/main/RecallManager.ps1
+$Recall = (dism /Online /Get-FeatureInfo /FeatureName:Recall)
+    if ($Recall -like "*State : Enabled*") {
+        Dism /Online /Disable-Feature /Featurename:Recall
+        }
+    if ($Recall -like "*State : Disabled*") {
+        Write-Host 
+        Write-Host "Recall is already disabled."
+        }
