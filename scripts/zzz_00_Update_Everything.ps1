@@ -11,13 +11,13 @@ $Recall = (dism /Online /Get-FeatureInfo /FeatureName:Recall)
 #NVCleanstall (Updates Graphics Drivers)
 Write-Host 
 Write-Host "Checking for Nvidia Driver Updates (if NVCleanstall is installed)..."
-try{Start $env:ProgramFiles\NVCleanstall\NVCleanstall.exe}
+try{Start-Process $env:ProgramFiles\NVCleanstall\NVCleanstall.exe -NoNewWindow}
 catch{Write-Host "NVCleanstall is not installed."}
 
 #Updates Windows Store Apps
 Write-Host 
 Write-Host "Checking for Windows Store Updates... (Manual -- Must click the button in Microsoft Store!)"
-Start ms-windows-store://downloadsandupdates -ErrorAction SilentlyContinue
+Start-Process ms-windows-store://downloadsandupdates
 
 #Updates Windows
 Write-Host 
