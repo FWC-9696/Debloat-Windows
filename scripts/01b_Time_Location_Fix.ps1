@@ -17,7 +17,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSen
 ###Location: Win11 Only
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name Value -Value Allow
 
-###Time: Common
+###Time Format
 Set-ItemProperty -Path "HKCU:\Control Panel\International" "itime" "1"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" "sShortTime" "HH:mm"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" "sTimeFormat" "HH:mm:ss"
@@ -33,6 +33,18 @@ foreach ($service in $services) {
     Write-Output "Setting $service to Automatic"
     Get-Service -Name $service | Set-Service -StartupType Automatic
 }
+
+
+#Set Time and Time Zone Automatically
+##Toggle OFF
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" "Type" "NoSync"
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\tzautoupdate" "Start" -Value 4
+##Toggle On
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" "Type" "NTP"
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\tzautoupdate" "Start" -Value 3
+
+Write-Host `n
+Write-Host "Clock & Timezone Synced."
 
 Start-Service -Name W32Time -PassThru
 Write-Host `n

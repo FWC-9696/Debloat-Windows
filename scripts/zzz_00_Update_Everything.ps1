@@ -1,3 +1,14 @@
+#Set Time and Time Zone Automatically
+##Toggle OFF
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" "Type" "NoSync"
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\tzautoupdate" "Start" -Value 4
+##Toggle On
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" "Type" "NTP"
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\tzautoupdate" "Start" -Value 3
+
+Write-Host
+Write-Host "Clock & Timezone Synced."
+
 #Disable Recall if Enabled. Developed using https://github.com/antonflor/RecallManager/blob/main/RecallManager.ps1
 $Recall = (dism /Online /Get-FeatureInfo /FeatureName:Recall)
     if ($Recall -like "*State : Enabled*") {
