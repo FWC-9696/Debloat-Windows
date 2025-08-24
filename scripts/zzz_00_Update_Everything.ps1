@@ -20,7 +20,18 @@ Write-Host "Checking for Windows Store Updates... (Manual -- Must click the butt
 Start-Process ms-windows-store://downloadsandupdates
 
 #Updates Windows
-Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" "AllowOptionalContent" "00000001"
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Value 1
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name SetAllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name SetAllowOptionalContent -Value 1
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name IsContinuousInnovationOptedIn -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "IsContinuousInnovationOptedIn" "1"
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name AllowMUUpdateService -Type DWORD -Value 1 -Force
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "AllowMUUpdateService" "1"
+
 Write-Host 
 Write-Host "Checking for Windows Updates..."
 Start-Process ms-settings:windowsupdate
@@ -36,7 +47,6 @@ Write-Host
 Write-Host "Checking for Edge Updates in the background..."
 Start-Process ${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe
 Write-Host
-
 Write-Host "Checking for Firefox Updates in the background..."
 try {Start-Process $env:ProgramFiles\Firefox*\updater.exe}
 catch{Write-Host "Firefox is not installed."}
@@ -45,6 +55,7 @@ catch{Write-Host "Firefox is not installed."}
 
 Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
 Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
+
 
 Write-Output `n
 Write-Output "Elevating priviledges for this process"
