@@ -141,7 +141,7 @@ $apps = @(
     "Microsoft.Todos"                          #Microsoft To-Do
     "MicrosoftCorporationII.QuickAssist"       #Quick Assist
     "MicrosoftCorporationII.MicrosoftFamily"   #Microsoft Family Safety
-    #"MicrosoftTeams"                           #Teams
+    "MicrosoftTeams"                           #Teams
 
     #More Win 11 Junk
     "Windows.DevHome"

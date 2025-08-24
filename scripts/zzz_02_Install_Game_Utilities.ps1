@@ -12,7 +12,7 @@
 Write-Host "Installing Game Utilities"
 $apps = @(
 
-    "Codeusa.BorderlessGaming"       #GREAT, Neccesary Utility for games that don't window properly
+    #"Codeusa.BorderlessGaming"       #GREAT, Neccesary Utility for games that don't window properly
     "Guru3D.RTSS"                    #RivaTuner Statistics Server
     "LOOT.LOOT"                      #Load Order Optimization Tool (Modloader Used for Some Games)
     ###"PlayStation.DualSenseFWUpdater" #DualShock (PS5 Controller) Firmware Updater -- No longer works

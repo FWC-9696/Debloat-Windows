@@ -10,8 +10,7 @@
 & pwsh.exe ".\scripts\02d_Resource_Tweaks.ps1"
 & pwsh.exe ".\scripts\01a_Optimize_UI_New.ps1"
 
-& Write-Host `n "Done. Press any key to clean up."
-Read-Host
+& Read-Host `n "Done. Press any key to clean up."
 &".\scripts\03_Clean_Up_Temp+Fix_Updates.ps1"
 #&".\scripts\zzz_00_Update_Everything.ps1"
 
