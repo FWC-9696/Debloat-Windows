@@ -1,0 +1,6 @@
+#This is needed to use Task Scheduler to run a Script with Administrator Privledges
+
+"%programfiles%\PowerShell\7\pwsh.exe" -ExecutionPolicy Bypass -File "C:\path\to\script.ps1"
+
+#prevents cmd from closing
+cmd /k

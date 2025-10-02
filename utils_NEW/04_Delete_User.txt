@@ -1,0 +1,1 @@
+net user unwanted_user_name_here /delete
