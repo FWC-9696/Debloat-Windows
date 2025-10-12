@@ -5,7 +5,7 @@ Write-Host "Stopping Windows Update Service..." `n
 
 Stop-Service -Name wuauserv -Force
 Stop-Service -Name bits -Force
-sleep 5
+Start-Sleep 5
 get-service bits, wuauserv
 
 Write-Host `n
@@ -30,7 +30,7 @@ $directory = @(
     Remove-Item $top_directory -Recurse -Force
     }
 Write-Host `n "If you encountered errors deleting files, remove $env:windir\SoftwareDistribution manually."
-sleep 5
+Start-Sleep 5
 
 Write-Host `n "Launching Disk Cleanup..." `n
 

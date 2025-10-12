@@ -187,6 +187,7 @@ foreach ($app in $apps) {
 $session | Remove-PSSession
 
 #Uninstall more stuff using WinGet
+winget uninstall 9NRX63209R7B #Outlook
 winget uninstall 9NFTCH6J7FHV #Power Automate
 winget uninstall 9NZBF4GT040C #Web Search from Microsoft Bing
 winget uninstall 9NTXGKQ8P7N0 #Cross Device Experience Host
@@ -196,6 +197,7 @@ winget uninstall 9NHT9RB2F4HD #COPILOT APP
 #winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widgets. Gets reinstalled below.***
 winget uninstall XPFFZHVGQWWLHB #OneNote
 winget uninstall 9N95Q1ZZPMH4 #MPEG-2 Video Extension (Has issues updating; can be reinstalled)
+
 
 #3rd party stuff using WinGet
 winget uninstall 9WZDNCRFJ0PK #Dropbox Lite
@@ -229,7 +231,7 @@ $shortcuts = @(
 )
 
 foreach ($shortcut in $shortcuts) {
-rm "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\$shortcut" -ErrorAction SilentlyContinue
+Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\$shortcut" -ErrorAction SilentlyContinue
 }
 
 Write-Output "Removing Cortana for the Current User"

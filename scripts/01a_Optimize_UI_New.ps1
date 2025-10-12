@@ -149,13 +149,13 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
 
 Write-Output `n "Done, Restarting Explorer..."
 taskkill /f /im explorer.exe
-sleep 1
-start explorer.exe
-sleep 3
+Start-Sleep 1
+Start-Process explorer.exe
+Start-Sleep 3
 
 Write-Output `n "Trying to Show Mouse Options in Control Panel & Settings"
 control /name Microsoft.Mouse
-start ms-settings:easeofaccess-mousepointer
+Start-Process ms-settings:easeofaccess-mousepointer
 
 Write-Output `n "REBOOT IS REQUIRED FOR SOME ITEMS!"
 Write-Output `n

@@ -24,11 +24,11 @@ foreach ($app in $apps) {
     }
 
 Write-Host "Installing Rockstar Games Launcher (No Winget Package)"
-sleep 3
+Start-Sleep 3
 Start-Process https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe #Rockstar Games Launcher
 
 Write-Host "Minecraft Launcher"
-sleep 3
+Start-Sleep 3
 Start-Process https://www.microsoft.com/store/productId/9PGW18NPBZV5
 
 Write-Host "Downloading Xenia Manager & Xenia Patches zip files"
