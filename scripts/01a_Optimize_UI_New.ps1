@@ -147,6 +147,28 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
 #New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ShowShortenedDateTime -Type Dword -Value 0 -ErrorAction SilentlyContinue   #Option to use long date format (Win 11)
 #Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "ShowShortenedDateTime" 0
 
+Write-Output "Fixing Start Menu Options Post-November-2025 Update"
+
+Write-Output `n `t "Set start menu to list view"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name AllAppsViewMode -Type DWORD -Value 2 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name "AllAppsViewMode" -Value 2
+
+Write-Output `n `t "Hide recent apps"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name ShowRecentList -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name "ShowRecentList" -Value 0
+
+Write-Output `n `t "Hide frequent apps"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name ShowFrequentList -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name "ShowFrequentList" -Value 0
+
+Write-Output `n `t "Hide frequent files"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_TrackDocs -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Start_TrackDocs" -Value 0
+
+Write-Output `n `t "Hide recommendations for tips, shortcuts, new apps, and more"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_IrisRecommendations -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Start_IrisRecommendations" -Value 0
+
 Write-Output `n "Done, Restarting Explorer..."
 taskkill /f /im explorer.exe
 Start-Sleep 1
@@ -156,6 +178,5 @@ Start-Sleep 3
 Write-Output `n "Trying to Show Mouse Options in Control Panel & Settings"
 control /name Microsoft.Mouse
 Start-Process ms-settings:easeofaccess-mousepointer
-
 Write-Output `n "REBOOT IS REQUIRED FOR SOME ITEMS!"
 Write-Output `n
