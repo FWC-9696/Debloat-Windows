@@ -1,4 +1,4 @@
-# This is a fork of the original Debloat Windows 10. It is constantly updated and should work on Windows 10 or 11.
+# This is a complete rewrite of the original Debloat Windows 10. It is constantly updated and should work on Windows 10 or 11.
 
 Note that the original Debloat-Windows-10 is generally unmaintained and is not very useful for Windows 11.
 
