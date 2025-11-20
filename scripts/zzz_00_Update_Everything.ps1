@@ -1,12 +1,7 @@
-#Disable Recall if Enabled. Developed using https://github.com/antonflor/RecallManager/blob/main/RecallManager.ps1
-$Recall = (dism /Online /Get-FeatureInfo /FeatureName:Recall)
-    if ($Recall -like "*State : Enabled*") {
-        Dism /Online /Disable-Feature /Featurename:Recall
-        }
-    if ($Recall -like "*State : Disabled*") {
-        Write-Host 
-        Write-Host "Recall is already disabled."
-        }
+#Run Disable_Recall Script
+$Path = $MyInvocation.MyCommand.Path
+$Directory = Split-Path -Path $Path -Parent
+& pwsh.exe -File $Directory\000_Disable_Recall.ps1
 
 #NVCleanstall (Updates Graphics Drivers)
 Write-Host 
@@ -58,7 +53,6 @@ catch{Write-Host "Firefox is not installed."}
 
 Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
 Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
-
 
 Write-Output `n
 Write-Output "Elevating priviledges for this process"
