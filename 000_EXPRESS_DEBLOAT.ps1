@@ -12,8 +12,18 @@ $Directory = Split-Path -Path $Path -Parent
 & pwsh.exe -File $Directory\scripts\02d_Resource_Tweaks.ps1
 & pwsh.exe -File $Directory\scripts\01a_Optimize_UI_New.ps1
 
-& Read-Host `n "Done. Press any key to clean up."
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "You may now close this window or press enter to clean up hard drive."
+Write-Host `n "Attend to the popup windows to change mouse settings and startup programs."
+Write-Host `n "REBOOT IS REQUIRED"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Write-Host `n "###################################################################################"
+Read-Host `n "Press any key to clean up hard drive, or exit this window."
 & pwsh.exe -File $Directory\scripts\03_Clean_Up_Temp+Fix_Updates.ps1
-#& pwsh.exe -File $Directory\scripts\zzz_00_Update_Everything.ps1
-
-& Write-Host `n "You may now close this window" `n "Some changes will require a reboot."
