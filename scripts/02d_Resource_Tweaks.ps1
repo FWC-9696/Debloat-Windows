@@ -31,7 +31,10 @@ New-Item -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Direct3D" -Name MaxPreRende
 Set-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Direct3D" "MaxPreRenderedFrames" -Value 1
 
 #Prioritize Games
-Write-Host `n "Prioritizing Games"
+Write-Host `n "Prioritizing Games..."
+
+Set-ItemProperty "HKCU:\Software\Microsoft\GameBar" "AutoGameModeEnabled" -Value 1 -Type DWORD
+
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" "Affinity" -Value 15 -Type DWord
 
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" "Background Only" False
@@ -65,3 +68,12 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory 
 Write-Host `n "Clear Paging File on Shutdown"
 New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" "ClearPageFileAtShutdown" -Value 1 -Type DWord
+
+#Enable Connected Standby
+Write-Host `n "Enable Modern Standby Network Connectivity (AC Power)"
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "ACSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
+Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "ACSettingIndex" -Value 1 -Type DWord
+
+Write-Host `n "Enable Modern Standby Network Connectivity (Battery Power)"
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "DCSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
+Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "DCSettingIndex" -Value 1 -Type DWord

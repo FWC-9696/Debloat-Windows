@@ -5,6 +5,7 @@ Write-Host "Installing Software"
 $apps = @(
     #Microsoft Tools & Apps
     "Microsoft.PowerShell"     #Latest Version of PowerShell
+    "Microsoft.VisualStudioCode.Insiders" #VSCode
     "9NBLGGH4NNS1"             #Update Winget itself
     "9n8mhtphngvv"             #Advanced Settings
     #"Microsoft.PowerToys"      #PowerToys
@@ -84,8 +85,8 @@ Write-Host "Opening Websites for Software with no Winget Packages"
 sleep 3
 Start-Process https://www.amd.com/en/support #AMD Software
 sleep 3
-Start-Process https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly
-sleep 3
+#Start-Process https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly
+#sleep 3
 Start-Process https://www.zhornsoftware.co.uk/caffeine/index.html#download
 #sleep 3
 #Start-Process https://www.thunderbird.net/en-US/thunderbird/all/?release=beta #Mozilla Thunderbird Beta
