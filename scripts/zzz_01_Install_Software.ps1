@@ -47,8 +47,8 @@ $apps = @(
     #"9NRX63209R7B"             #Outlook for Windows (Replacement for Mail & Calendar)
 
     #Logitech
-    "Logitech.UnifyingSoftware" #Logitech Unifying Software for wireless KB/Mouse
-    #"Logitech.OptionsPlus"      #Logitech Software for consumer-series
+    #"Logitech.UnifyingSoftware" #Logitech Unifying Software ### DEPRECATED DO NOT USE
+    "Logitech.OptionsPlus"      #Logitech Software for consumer-series
     "Logitech.GHub"             #Logitech Software for G-series
 
     #Fan Control

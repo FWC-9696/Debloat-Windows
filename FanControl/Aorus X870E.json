@@ -1,0 +1,646 @@
+{
+  "__VERSION__": "251",
+  "Sensors": {
+    "AdlxWrapperSettings": {
+      "Enabled": true
+    },
+    "DisabledPlugins": [],
+    "DisableStorageSensors": true,
+    "LibreHardwareMonitorSettings": {
+      "Controller": false,
+      "CPU": true,
+      "EmbeddedEC": true,
+      "GPU": true,
+      "Memory": false,
+      "Motherboard": true,
+      "PSU": false,
+      "Storage": false,
+      "StorageUpdateInterval": "00:01:00",
+      "ZeroRPMOverride": true
+    },
+    "NvAPIWrapperSettings": {
+      "Enabled": true,
+      "ZeroRPMOverride": true
+    }
+  },
+  "Main": {
+    "Controls": [
+      {
+        "Name": "CPU Fan",
+        "NickName": "CPU Fan",
+        "Identifier": "/lpc/it8696e/control/0",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "Flat"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/it8696e/fan/0"
+        },
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            0,
+            288
+          ],
+          [
+            1,
+            293
+          ],
+          [
+            10,
+            293
+          ],
+          [
+            20,
+            444
+          ],
+          [
+            30,
+            657
+          ],
+          [
+            40,
+            838
+          ],
+          [
+            50,
+            978
+          ],
+          [
+            60,
+            1131
+          ],
+          [
+            70,
+            1254
+          ],
+          [
+            80,
+            1375
+          ],
+          [
+            90,
+            1475
+          ],
+          [
+            100,
+            1585
+          ]
+        ]
+      },
+      {
+        "Name": "System Fan #1",
+        "NickName": "Rear Fan",
+        "Identifier": "/lpc/it8696e/control/1",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "Flat"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/it8696e/fan/1"
+        },
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            1,
+            485
+          ],
+          [
+            10,
+            485
+          ],
+          [
+            20,
+            490
+          ],
+          [
+            30,
+            652
+          ],
+          [
+            40,
+            839
+          ],
+          [
+            50,
+            997
+          ],
+          [
+            60,
+            1145
+          ],
+          [
+            70,
+            1281
+          ],
+          [
+            80,
+            1399
+          ],
+          [
+            90,
+            1489
+          ],
+          [
+            100,
+            1596
+          ]
+        ]
+      },
+      {
+        "Name": "System Fan #2",
+        "NickName": "Top Fan",
+        "Identifier": "/lpc/it8696e/control/2",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "Flat"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/it8696e/fan/2"
+        },
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            1,
+            515
+          ],
+          [
+            10,
+            517
+          ],
+          [
+            20,
+            518
+          ],
+          [
+            30,
+            651
+          ],
+          [
+            40,
+            822
+          ],
+          [
+            50,
+            958
+          ],
+          [
+            60,
+            1091
+          ],
+          [
+            70,
+            1209
+          ],
+          [
+            80,
+            1315
+          ],
+          [
+            90,
+            1408
+          ],
+          [
+            100,
+            1527
+          ]
+        ]
+      },
+      {
+        "Name": "System Fan #3",
+        "NickName": "System Fan #3",
+        "Identifier": "/lpc/it8696e/control/3",
+        "IsHidden": true,
+        "Enable": false,
+        "SelectedFanCurve": null,
+        "SelectedOffset": 0,
+        "PairedFanSensor": null,
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": []
+      },
+      {
+        "Name": "CPU Optional Fan",
+        "NickName": "CPU Optional Fan",
+        "Identifier": "/lpc/it8696e/control/4",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "Flat"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/it8696e/fan/4"
+        },
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            0,
+            302
+          ],
+          [
+            1,
+            302
+          ],
+          [
+            10,
+            303
+          ],
+          [
+            20,
+            464
+          ],
+          [
+            30,
+            651
+          ],
+          [
+            40,
+            823
+          ],
+          [
+            50,
+            970
+          ],
+          [
+            60,
+            1107
+          ],
+          [
+            70,
+            1230
+          ],
+          [
+            80,
+            1343
+          ],
+          [
+            90,
+            1448
+          ],
+          [
+            100,
+            1548
+          ]
+        ]
+      },
+      {
+        "Name": "System Fan #5 / Pump",
+        "NickName": "System Fan #5 / Pump",
+        "Identifier": "/lpc/it87952e/control/0",
+        "IsHidden": true,
+        "Enable": false,
+        "SelectedFanCurve": null,
+        "SelectedOffset": 0,
+        "PairedFanSensor": null,
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": []
+      },
+      {
+        "Name": "System Fan #6 / Pump",
+        "NickName": "System Fan #6 / Pump",
+        "Identifier": "/lpc/it87952e/control/1",
+        "IsHidden": true,
+        "Enable": false,
+        "SelectedFanCurve": null,
+        "SelectedOffset": 0,
+        "PairedFanSensor": null,
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": []
+      },
+      {
+        "Name": "System Fan #4",
+        "NickName": "Front Fan",
+        "Identifier": "/lpc/it87952e/control/2",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "Flat"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/it87952e/fan/2"
+        },
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            0,
+            501
+          ],
+          [
+            1,
+            501
+          ],
+          [
+            10,
+            502
+          ],
+          [
+            20,
+            503
+          ],
+          [
+            30,
+            667
+          ],
+          [
+            40,
+            858
+          ],
+          [
+            50,
+            1014
+          ],
+          [
+            60,
+            1174
+          ],
+          [
+            70,
+            1312
+          ],
+          [
+            80,
+            1443
+          ],
+          [
+            90,
+            1551
+          ],
+          [
+            100,
+            1675
+          ]
+        ]
+      },
+      {
+        "Name": "Control 1 - NVIDIA GeForce RTX 3060",
+        "NickName": "Control 1 - NVIDIA GeForce RTX 3060",
+        "Identifier": "NVApiWrapper/0-GA104-A/control/0",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "GPU"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "NVApiWrapper/0-GA104-A/fan/0"
+        },
+        "SelectedStart": 49,
+        "SelectedStop": 46,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            40,
+            0
+          ],
+          [
+            50,
+            859
+          ],
+          [
+            60,
+            1299
+          ],
+          [
+            70,
+            1741
+          ],
+          [
+            80,
+            2196
+          ],
+          [
+            90,
+            2604
+          ],
+          [
+            100,
+            2853
+          ]
+        ]
+      },
+      {
+        "Name": "Control 2 - NVIDIA GeForce RTX 3060",
+        "NickName": "Control 2 - NVIDIA GeForce RTX 3060",
+        "Identifier": "NVApiWrapper/0-GA104-A/control/1",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "GPU"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "NVApiWrapper/0-GA104-A/fan/1"
+        },
+        "SelectedStart": 49,
+        "SelectedStop": 46,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": [
+          [
+            40,
+            0
+          ],
+          [
+            50,
+            857
+          ],
+          [
+            60,
+            1284
+          ],
+          [
+            70,
+            1722
+          ],
+          [
+            80,
+            2162
+          ],
+          [
+            90,
+            2594
+          ],
+          [
+            100,
+            2994
+          ]
+        ]
+      }
+    ],
+    "CustomSensors": [],
+    "Fahrenheit": false,
+    "FanCurves": [
+      {
+        "CommandMode": 0,
+        "Name": "Flat",
+        "IsHidden": false,
+        "Percent": 100
+      },
+      {
+        "CommandMode": 0,
+        "Name": "GPU",
+        "IsHidden": false,
+        "SelectedTempSource": {
+          "Identifier": "NVApiWrapper/0-GA104-A/sensor/0"
+        },
+        "MaximumFanSpeed": 100,
+        "MaximumTemperature": 65,
+        "MinimumFanSpeed": 50,
+        "MinimumTemperature": 40,
+        "HysteresisConfig": {
+          "ResponseTimeUp": 1,
+          "ResponseTimeDown": 1,
+          "HysteresisValueUp": 2,
+          "HysteresisValueDown": 2,
+          "IgnoreHysteresisAtLimits": false
+        }
+      }
+    ],
+    "FanSensors": [
+      {
+        "Identifier": "/lpc/it8696e/fan/0",
+        "IsHidden": false,
+        "Name": "CPU Fan",
+        "NickName": "CPU Fan"
+      },
+      {
+        "Identifier": "/lpc/it8696e/fan/1",
+        "IsHidden": false,
+        "Name": "System Fan #1",
+        "NickName": "Rear Fan"
+      },
+      {
+        "Identifier": "/lpc/it8696e/fan/2",
+        "IsHidden": false,
+        "Name": "System Fan #2",
+        "NickName": "Top Fan"
+      },
+      {
+        "Identifier": "/lpc/it8696e/fan/3",
+        "IsHidden": false,
+        "Name": "System Fan #3",
+        "NickName": "System Fan #3"
+      },
+      {
+        "Identifier": "/lpc/it8696e/fan/4",
+        "IsHidden": false,
+        "Name": "CPU Optional Fan",
+        "NickName": "CPU Optional Fan"
+      },
+      {
+        "Identifier": "/lpc/it87952e/fan/0",
+        "IsHidden": false,
+        "Name": "System Fan #5 / Pump",
+        "NickName": "System Fan #5 / Pump"
+      },
+      {
+        "Identifier": "/lpc/it87952e/fan/1",
+        "IsHidden": false,
+        "Name": "System Fan #6 / Pump",
+        "NickName": "System Fan #6 / Pump"
+      },
+      {
+        "Identifier": "/lpc/it87952e/fan/2",
+        "IsHidden": false,
+        "Name": "System Fan #4 ",
+        "NickName": "Front Fan"
+      },
+      {
+        "Identifier": "NVApiWrapper/0-GA104-A/fan/0",
+        "IsHidden": false,
+        "Name": "Fan 1 - NVIDIA GeForce RTX 3060",
+        "NickName": "Control 1 - NVIDIA GeForce RTX 3060"
+      },
+      {
+        "Identifier": "NVApiWrapper/0-GA104-A/fan/1",
+        "IsHidden": false,
+        "Name": "Fan 2 - NVIDIA GeForce RTX 3060",
+        "NickName": "Control 2 - NVIDIA GeForce RTX 3060"
+      }
+    ],
+    "HideCalibration": false,
+    "HideFanSpeedCards": true,
+    "HorizontalUIOrientation": false,
+    "PrimaryColor": "#FF607D8B",
+    "SecondaryColor": "#FFAEEA00",
+    "SelectedTheme": "",
+    "ShowHiddenCards": false,
+    "SyncThemeWithWindows": true,
+    "SyncTrayIconColorWithWindows": true,
+    "TemperatureSensors": [],
+    "TrayIconColor": null,
+    "TrayIcons": []
+  }
+}

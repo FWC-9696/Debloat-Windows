@@ -15,7 +15,7 @@ New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPa
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" "ScrollDirection" 0
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name TapsEnabled -Type DWORD -Value 1 -ErrorAction SilentlyContinue
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" "TapsEnabled" 1
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Type DWORD -Value 0
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Value 4
 
 Write-Output `n "Apply MarkC's mouse acceleration fix"
@@ -83,7 +83,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\P
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name EnableTransparency -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "EnableTransparency" 0
 
-New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAL -PropertyType DWORD -Value 0                #Set Taskbar to Left (0) or Center (1) (Win 11)
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAL -PropertyType DWORD -Value 0 -ErrorAction SilentlyContinue -Force     #Set Taskbar to Left (0) or Center (1) (Win 11)
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarAL" 0
 
 New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_ShowClassicMode -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
