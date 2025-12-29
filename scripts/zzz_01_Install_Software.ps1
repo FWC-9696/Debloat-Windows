@@ -24,8 +24,8 @@ $apps = @(
     #"9WZDNCRFJ1P3"	            #One Drive
     #"9PGW18NPBZV5"             #Minecraft Launcher, Doesn't work; Needs to be installed through Store/Xbox App
     
-    #Caffiene
-    #"ZhornSoftware.Caffeine"     #Keep Screen Awake
+    Caffiene
+    "ZhornSoftware.Caffeine"     #Keep Screen Awake
     ###Doesn't create start menu entry. See below for link
 
     #Rufus
@@ -55,7 +55,8 @@ $apps = @(
     "Rem0o.FanControl"          #Can controll graphics card fan speeds
 
      #Graphics Drivers
-    "TechPowerUp.NVCleanstall"     #NVCleanstall
+    
+    #"TechPowerUp.NVCleanstall"     #NVCleanstall, See Bottom of script
     #######"9NZ1BJQN6BHL"                 #AMD Radeon Software -- DON'T USE THIS Version. See bottom for correct version.
     #"DisplayLink.GraphicsDriver"  #DisplayLink Graphics Driver
     #"9N09F8V8FS02"                 #DisplayLink Manager
@@ -81,12 +82,15 @@ foreach ($app in $apps) {
 
     }
 
-Write-Host "Opening Websites for Software with no Winget Packages"
-sleep 3
-Start-Process https://www.amd.com/en/support #AMD Software
-sleep 3
-#Start-Process https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly
-#sleep 3
-Start-Process https://www.zhornsoftware.co.uk/caffeine/index.html#download
-#sleep 3
-#Start-Process https://www.thunderbird.net/en-US/thunderbird/all/?release=beta #Mozilla Thunderbird Beta
+Write-Host `n"Graphics Drivers:"
+$graphics = Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name
+if ($graphics -like "*AMD*") {
+    Write-Host $graphics
+    Write-Host `n
+    Start-Process https://www.amd.com/en/support #AMD Software
+}
+if ($graphics -like "*NVidia*") {
+    Write-Host $graphics
+    Write-Host `n
+    Winget install TechPowerUp.NVCleanstall
+}

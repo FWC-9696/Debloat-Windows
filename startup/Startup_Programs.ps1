@@ -9,12 +9,16 @@
 #& "$env:ProgramFiles\NVCleanstall\NVCleanstall.exe"						                          #NVCleanstall
 #& "$env:ProgramFiles\DS4Windows\DS4Updater.exe"							                          #DS4Windows
 #& "$env:ProgramFiles\Sony\FW updater\FWupdater.exe"						                          #DualSense Firmware Updater
-Start-Process "$env:ProgramFiles\LGHUB\lghub.exe" -ErrorAction SilentlyContinue	                              #Logitech G Hub
+#Start-Process "$env:ProgramFiles\LGHUB\lghub.exe" -ErrorAction SilentlyContinue	                              #Logitech G Hub
 #& "$env:ProgramFiles\caffeine.exe" -startoff							                          #Caffeine, but start inactive with "-startoff"
-"$env:LOCALAPPDATA\PowerToys\PowerToys.Awake.exe"                                                 #PowerToys Awake, Replaces Caffeine
+#"$env:LOCALAPPDATA\PowerToys\PowerToys.Awake.exe"                                                 #PowerToys Awake, Replaces Caffeine
 #& "$env:ProgramFiles\DisplayLink Core Software\DisplayLinkTrayApp.exe"				              #DisplayLink
 #& "${env:ProgramFiles(x86)}\Turtle Beach\Ear Force Audio Hub\PTUtilityShell.exe"		          #Turtle Beach Audio Hub (Crap)
-& "$env:LOCALAPPDATA\Amazon Games\App\Amazon Games.exe"						                      #Amazon Games
-& "${env:ProgramFiles(x86)}\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe"      #Epic Games
+#& "$env:LOCALAPPDATA\Amazon Games\App\Amazon Games.exe"						                      #Amazon Games
+#& "${env:ProgramFiles(x86)}\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe"      #Epic Games
 #explorer shell:appsFolder\Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe!App	           	  #Microsoft Solitaire Colletion NOTE: Use Get:StartApps for list of UWP Apps
-Start-Process https://gaming.amazon.com/home
+#Start-Process https://gaming.amazon.com/home
+
+Start-Process ${env:ProgramFiles(x86)}\FanControl\FanControl.exe
+Start-Process $env:LOCALAPPDATA\Microsoft\OneDrive\OneDrive.exe
+taskmgr
