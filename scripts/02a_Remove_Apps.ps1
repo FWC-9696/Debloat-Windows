@@ -192,12 +192,12 @@ winget uninstall 9NFTCH6J7FHV #Power Automate
 winget uninstall 9NZBF4GT040C #Web Search from Microsoft Bing
 winget uninstall 9NTXGKQ8P7N0 #Cross Device Experience Host
 winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
-#winget uninstall 9N3RK8ZV2ZR8 #Widgets Platform Runtime
+winget uninstall 9N3RK8ZV2ZR8 #Widgets Platform Runtime
 winget uninstall 9NHT9RB2F4HD #COPILOT APP
-#winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widgets. Gets reinstalled below.***
+winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widgets.***
 winget uninstall XPFFZHVGQWWLHB #OneNote
 winget uninstall 9N95Q1ZZPMH4 #MPEG-2 Video Extension (Has issues updating; can be reinstalled)
-
+winget uninstall 9PC1H9VN18CM #Start Experiences App, which keeps messing with the Start Menu Layout
 
 #3rd party stuff using WinGet
 winget uninstall 9WZDNCRFJ0PK #Dropbox Lite
@@ -279,8 +279,8 @@ winget uninstall 9NTXGKQ8P7N0
 Write-Host `n
 
 winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox TCUI
-winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
-winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
+#winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
+#winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 
 Write-Output `n
 Write-Output "Note: Windows 11 will pin apps to the start menu without installing them." `n "You may need to manually unpin these apps!"

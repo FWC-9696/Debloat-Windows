@@ -26,7 +26,7 @@ $apps = @(
     
     Caffiene
     "ZhornSoftware.Caffeine"     #Keep Screen Awake
-    ###Doesn't create start menu entry. See below for link
+    ###Doesn't create start menu entry. See shortcuts.
 
     #Rufus
     "Rufus.Rufus"                #Mounts ISOs

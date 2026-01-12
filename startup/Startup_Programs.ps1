@@ -21,4 +21,4 @@
 
 Start-Process ${env:ProgramFiles(x86)}\FanControl\FanControl.exe
 Start-Process $env:LOCALAPPDATA\Microsoft\OneDrive\OneDrive.exe
-taskmgr
+perfmon.exe /res

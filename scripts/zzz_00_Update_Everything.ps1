@@ -9,6 +9,12 @@ Write-Host "Checking for Nvidia Driver Updates (if NVCleanstall is installed)...
 try{Start-Process $env:ProgramFiles\NVCleanstall\NVCleanstall.exe -NoNewWindow}
 catch{Write-Host "NVCleanstall is not installed."}
 
+#Gigabyte Command Center
+Write-Host 
+Write-Host "Checking for Gigabyte Driver Updates (if GCC is installed)..."
+try{Start-Process "$env:ProgramFiles\GIGABYTE\Control Center\LaunchGCC.exe" -NoNewWindow}
+catch{Write-Host "NVCleanstall is not installed."}
+
 #Updates Windows Store Apps
 Write-Host 
 Write-Host "Checking for Windows Store Updates... (Manual -- Must click the button in Microsoft Store!)"
@@ -119,3 +125,6 @@ Write-Host "winget upgrade <ID>"
 Write-Host
 $date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 Write-Host "Last Run: $date" `n
+
+#Open Resource Monitor
+Invoke-Expression "$env:windir\system32\perfmon.exe /res"
