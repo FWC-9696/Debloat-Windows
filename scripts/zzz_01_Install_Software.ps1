@@ -7,7 +7,7 @@ $apps = @(
     "Microsoft.PowerShell"     #Latest Version of PowerShell
     "Microsoft.VisualStudioCode.Insiders" #VSCode
     "9NBLGGH4NNS1"             #Update Winget itself
-    "9n8mhtphngvv"             #Advanced Settings
+    "9N8MHTPHNGVV"             #Advanced Settings
     #"Microsoft.PowerToys"      #PowerToys
     "9P7KNL5RWT25"             #Microsoft Sysinternals Suite (Includes Process explorer & Other Tools)
     #"9MV0B5HZVK9Z"             #Xbox
@@ -24,9 +24,15 @@ $apps = @(
     #"9WZDNCRFJ1P3"	            #One Drive
     #"9PGW18NPBZV5"             #Minecraft Launcher, Doesn't work; Needs to be installed through Store/Xbox App
     
-    Caffiene
+    #Caffiene
     "ZhornSoftware.Caffeine"     #Keep Screen Awake
     ###Doesn't create start menu entry. See shortcuts.
+
+    #HWInfo
+    REALiX.HWinfo
+
+    #Prime95 (Usefull for Stress Tests)
+    mersenne.prime95
 
     #Rufus
     "Rufus.Rufus"                #Mounts ISOs

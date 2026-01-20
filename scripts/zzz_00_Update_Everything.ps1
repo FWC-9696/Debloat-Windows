@@ -1,3 +1,6 @@
+#Stop WebView
+Stop-Process -Name *WebView*
+
 #Run Disable_Recall Script
 $Path = $MyInvocation.MyCommand.Path
 $Directory = Split-Path -Path $Path -Parent
@@ -128,3 +131,14 @@ Write-Host "Last Run: $date" `n
 
 #Open Resource Monitor
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
+
+#Uninstall WebView2
+Stop-Process -Name *WebView*
+if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView) {
+   Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView
+}
+else {
+    Write-Host "WebView Folder Not Found"
+}
+Write-Host "WebView Removed"
+Write-Host ""
