@@ -1,4 +1,4 @@
-Stop-Process -Name *WebView*
+Stop-Process -Name *WebView* -Force
 Start-Sleep 10
 Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView
 Start-Sleep 5
