@@ -9,6 +9,7 @@ $Directory = Split-Path -Path $Path -Parent
 #NVCleanstall (Updates Graphics Drivers)
 Write-Host 
 Write-Host "Checking for Nvidia Driver Updates (if NVCleanstall is installed)..."
+Stop-Process -Name NVCleanstall -ErrorAction SilentlyContinue
 try{Start-Process $env:ProgramFiles\NVCleanstall\NVCleanstall.exe -NoNewWindow}
 catch{Write-Host "NVCleanstall is not installed."}
 
@@ -21,7 +22,12 @@ catch{Write-Host "NVCleanstall is not installed."}
 #Updates Windows Store Apps
 Write-Host 
 Write-Host "Checking for Windows Store Updates... (Manual -- Must click the button in Microsoft Store!)"
-Start-Process ms-windows-store://downloadsandupdates
+try {
+    Start-Process ms-windows-store://downloadsandupdates
+}
+catch {
+    Write-Host "Windows Store is not installed, or an error has occured."
+}
 
 #Updates Windows
 New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
@@ -51,12 +57,13 @@ try{Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.Update.exe -Verb RunAs}
 catch{Write-Host "PowerToys is not installed."}
 Write-Host
 
-Write-Host "Checking for Edge Updates in the background..."
-Start-Process ${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe
-Write-Host
-Write-Host "Checking for Firefox Updates in the background..."
-try {Start-Process $env:ProgramFiles\Firefox*\updater.exe}
-catch{Write-Host "Firefox is not installed."}
+#Write-Host "Checking for Edge Updates in the background..."
+#Start-Process ${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe
+#Write-Host
+
+#Write-Host "Checking for Firefox Updates in the background..."
+#try {Start-Process $env:ProgramFiles\Firefox*\updater.exe}
+#catch{Write-Host "Firefox is not installed."}
 
 #This script will set the date/time based on location. Helpful for laptops.
 
@@ -130,13 +137,21 @@ $date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 Write-Host "Last Run: $date" `n
 
 #Open Resource Monitor
+Stop-Process -Name perfmon -ErrorAction SilentlyContinue
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
 
 #Uninstall WebView2
 Stop-Process -Name *WebView* -Force
 if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView) {
-   Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView
-}
+   try {
+    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView -ErrorAction  Break
+   }
+   catch {
+    Stop-Process -Name *WebView* -Force
+    Sleep 20
+    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView -ErrorAction  Continue
+   }
+   }
 else {
     Write-Host "WebView Folder Not Found"
 }

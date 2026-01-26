@@ -186,6 +186,9 @@ foreach ($app in $apps) {
 
 $session | Remove-PSSession
 
+#Uninstall GameAssist
+Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUsers
+
 #Uninstall more stuff using WinGet
 winget uninstall 9NRX63209R7B #Outlook
 winget uninstall 9NFTCH6J7FHV #Power Automate

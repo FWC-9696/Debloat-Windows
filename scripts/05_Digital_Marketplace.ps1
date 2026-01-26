@@ -40,16 +40,79 @@ try {
         New-Item -Path $dmaUninstallPath -Force | Out-Null
     }
 
-    # Enable Edge uninstall option
+    # Enable Edge uninstall option (Doesn't work)
     Set-ItemProperty -Path $dmaUninstallPath -Name "EnableEdgeUninstall" -Value 1 -Type DWord
 
-    # Enable WebView2 uninstall option
+    # Enable WebView2 uninstall option (Doesn't Work)
     Set-ItemProperty -Path $dmaUninstallPath -Name "EnableWebView2Uninstall" -Value 1 -Type DWord
-
-    Write-Host "`nEdge and WebView2 uninstall options enabled. Go to Settings → Apps to uninstall them." -ForegroundColor Green
-
-    Write-Host "` All DMA-related features have been enabled. Please restart your PC for changes to take effect." -ForegroundColor Green
 }
 catch {
     Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
 }
+Write-Host ""
+###Edit the JSON file to enable other options
+$geoKey = "HKCU:\Control Panel\International\Geo"
+$geo = (Get-ItemProperty -Path $geoKey -Name "Name").Name
+Write-Host "Detected Region: $geo"
+
+$jsonPath = "$env:windir\System32\IntegratedServicesRegionPolicySet.json"
+
+takeown /F $jsonPath /A
+icacls $jsonPath /grant Administrators:F
+
+Get-Content $jsonPath | ConvertFrom-Json | Select-Object -ExpandProperty policies | Format-Table -AutoSize
+
+$jsonRaw = Get-Content $jsonPath -Raw -ErrorAction Stop
+$json = $jsonRaw | ConvertFrom-Json -ErrorAction Stop
+
+$edgePolicy = $json.policies | Where-Object {$_.guid -match {1bca278a-5d11-4acf-ad2f-f9ab6d7f93a6} }
+
+#Write-Host "$edgePolicy"
+#Write-Host "$edgePolicy.defaultState"
+
+Write-Host "Enable Edge Uninstallation"
+
+if ($edgePolicy) {
+    Write-Host "Found policy" -ForegroundColor Green
+    
+    # Add current region to enabled list if missing
+    $enabledRegions = $edgePolicy.conditions.region.enabled
+    if ($geo -notin $enabledRegions) {
+        $edgePolicy.conditions.region.enabled += $geo
+        Write-Host "→ Added '$geo' to enabled regions" -ForegroundColor Green
+    } else {
+        Write-Host "→ Region '$geo' already enabled" -ForegroundColor DarkGreen
+    }
+    $edgePolicy.defaultState = "enabled"
+} else {
+    Write-Warning "Policy not found in JSON. The file format may have changed."
+}
+
+Write-Host ""
+Write-Host "Enable Microsoft Store Uninstallation"
+
+$storePolicy = $json.policies | Where-Object {$_.guid -match {9a453b66-5ea7-4322-9aba-b054e914cc67} }
+
+if ($storePolicy) {
+    Write-Host "Found policy" -ForegroundColor Green
+    
+    # Add current region to enabled list if missing
+    $enabledRegions = $storePolicy.conditions.region.enabled
+    if ($geo -notin $enabledRegions) {
+        $storePolicy.conditions.region.enabled += $geo
+        Write-Host "→ Added '$geo' to enabled regions" -ForegroundColor Green
+    } else {
+        Write-Host "→ Region '$geo' already enabled" -ForegroundColor DarkGreen
+    }
+    $storePolicy.defaultState = "enabled"
+} else {
+    Write-Warning "Policy not found in JSON. The file format may have changed."
+}
+
+
+$json | ConvertTo-Json -Depth 100 | Set-Content $jsonPath -Force -Encoding UTF8
+Write-Host ""
+Write-Host "JSON file updated successfully." -ForegroundColor Green
+Write-Host ""
+Write-Host "Reboot Required. NOTE: YOU MUST SET ANOTHER DEFAULT BROWSER TO UNINSTALL EDGE!" -ForegroundColor Yellow
+Write-Host ""
