@@ -19,6 +19,7 @@
 #explorer shell:appsFolder\Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe!App	           	  #Microsoft Solitaire Colletion NOTE: Use Get:StartApps for list of UWP Apps
 #Start-Process https://gaming.amazon.com/home
 
+Stop-Process -Name perfmon -Force
 Start-Process ${env:ProgramFiles(x86)}\FanControl\FanControl.exe
 Start-Process $env:LOCALAPPDATA\Microsoft\OneDrive\OneDrive.exe
 perfmon.exe /res
