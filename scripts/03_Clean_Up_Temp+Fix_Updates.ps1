@@ -1,39 +1,43 @@
 #This will delete common temporary directories and might help fix Windows updates.
+Write-Host ""
+Write-Host "Pausing Windows Updates..." `n
 
-Write-Host `n
-Write-Host "Stopping Windows Update Service..." `n
+$pause = (Get-Date).AddDays(1)
+$pause = $pause.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+$pause_start = (Get-Date)
+$pause_start = $pause_start.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
 
-Stop-Service -Name wuauserv -Force
-Stop-Service -Name bits -Force
-Start-Sleep 5
-get-service bits, wuauserv
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings' -Name 'PauseUpdatesExpiryTime' -Value $pause
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings' -Name 'PauseUpdatesStartTime' -Value $pause_start
 
-Write-Host `n
+Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings' | Select-Object PauseUpdatesExpiryTime | Format-Table -AutoSize | Out-Host
+
+Start-Sleep 1
+
+Write-Host ""
+Write-Host "Stopping Windows Update Services..." `n
+
+Stop-Service -Name "wuauserv","BITS" -Force
+
+Get-Service -Name "wuauserv","BITS" | Format-Table -AutoSize | Out-Host
+
 Write-Host "Removing System Files..." `n
 
-
 $directory = @(
-    "$env:LOCALAPPDATA\Microsoft\Windows\INetCache\*"
-    "$env:windir\SoftwareDistribution\*"
-    )
-
-    foreach ($directory in $directory) {
-    Get-ChildItem -Path $directory | Remove-Item -Force -Recurse
-    }
-
-    $top_directory = @(
-    "$env:LOCALAPPDATA\Microsoft\Windows\INetCache"
+    "$env:LOCALAPPDATA\Microsoft\Windows\INetCache" #Doesn't usually cause any issues with Windows Update.
     "$env:windir\SoftwareDistribution"
     )
 
-    foreach ($top_directory in $top_directory) {
-    Remove-Item $top_directory -Recurse -Force
+    foreach ($directory in $directory) {
+    Remove-Item $directory -Recurse -Force -ErrorAction Continue
     }
-Write-Host `n "If you encountered errors deleting files, remove $env:windir\SoftwareDistribution manually."
+Write-Host ""
+Write-Host "If you encountered errors deleting files, remove $env:windir\SoftwareDistribution manually." `n
 Start-Sleep 5
 
-Write-Host `n "Launching Disk Cleanup..." `n
+Write-Host "Launching Disk Cleanup..." `n
 
-Start-Process "$env:windir\system32\cleanmgr.exe" -Verb RunAs -Wait
+Start-Process "$env:windir\system32\cleanmgr.exe" -Verb RunAs
 
-Write-Host "Done"
+Write-Host "Done. Unpause updates in settings." `n
+Start-Process ms-settings:windowsupdate
