@@ -14,9 +14,15 @@ New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -E
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Name PowerThrottlingOff -Type DWORD -Value 1 -ErrorAction SilentlyContinue
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" "PowerThrottlingOff" -Value 1
 
-#Turn off CPU Core Parking
-Write-Host `n "Turn off CPU Core Parking" 
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" "Attributes" -Value 0
+#Turn on Power Saver Always
+Write-Host `n "Turn on Battery Saver"
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
+powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
+powercfg /S SCHEME_CURRENT
+
+#Turn ON CPU Core Parking
+Write-Host `n "Turn on CPU Core Parking" 
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" "Attributes" -Value 1
 
 #Turn off network throttling
 Write-Host `n "Turn off Network Throttling" 
