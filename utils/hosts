@@ -1,0 +1,63 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+#=====================================
+0.0.0.0 www.googletagservices.com
+0.0.0.0 www-googletagmanager.l.google.com
+0.0.0.0 www-google-analytics.l.google.com
+0.0.0.0 www.googleadservices.com
+0.0.0.0 www.analytic-google.com
+0.0.0.0 tpc.googlesyndication.com
+0.0.0.0 stats.g.doubleclick.net
+0.0.0.0 static.doubleclick.net
+0.0.0.0 ssl.google-analytics.com
+0.0.0.0 s.innovid.com
+0.0.0.0 securepubads.g.doubleclick.net
+0.0.0.0 secure-ds.serving-sys.com
+0.0.0.0 s0.2mdn.net
+0.0.0.0 rtd.tubemogul.com
+0.0.0.0 pubads.g.doubleclick.net
+0.0.0.0 pixel.moatads.com
+0.0.0.0 pagead.l.doubleclick.net
+0.0.0.0 pagead.googlesyndication.com
+0.0.0.0 pagead2.googlesyndication.com
+0.0.0.0 pagead1.googlesyndication.com
+0.0.0.0 innovid.com
+0.0.0.0 googleads.g.doubleclick.net
+0.0.0.0 googleadservices.com
+0.0.0.0 googleads4.g.doubleclick.net
+0.0.0.0 googleadapis.l.google.com
+0.0.0.0 g.doubleclick.net
+0.0.0.0 fwmrm.net
+0.0.0.0 fls.doubleclick.net
+0.0.0.0 files.adform.net
+0.0.0.0 dts.innovid.com
+0.0.0.0 doubleclick.net
+0.0.0.0 analytic-google.com
+0.0.0.0 ad.youtube.com
+0.0.0.0 ads.youtube.com
+0.0.0.0 adservice.google.com
+0.0.0.0 ads.doubleclick.net
+0.0.0.0 ad.mo.doubleclick.net
+0.0.0.0 ad-g.doubleclick.net
+0.0.0.0 ad.doubleclick.net
+0.0.0.0 2mdn.net
+0.0.0.0 2975c.v.fwmrm.net

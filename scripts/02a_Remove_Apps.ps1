@@ -190,17 +190,40 @@ $session | Remove-PSSession
 Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUsers
 
 #Uninstall more stuff using WinGet
-winget uninstall 9NRX63209R7B #Outlook
-winget uninstall 9NFTCH6J7FHV #Power Automate
+
 winget uninstall 9NZBF4GT040C #Web Search from Microsoft Bing
 winget uninstall 9NTXGKQ8P7N0 #Cross Device Experience Host
 winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
+winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
 winget uninstall 9N3RK8ZV2ZR8 #Widgets Platform Runtime
-winget uninstall 9NHT9RB2F4HD #COPILOT APP
+winget uninstall 9PCSD6N03BKV #Windows Application Compatiblility Enhancements (WACE)
+winget uninstall 9NHT9RB2F4HD #Microsoft Copilot App
+winget uninstall 9WZDNCRD29V9 #Microsoft Copilot 365 App
 winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widgets.***
+winget uninstall 9PLJQ12FQ3CV #WinAppRuntime.Main.1.8
+winget uninstall 9P5Z076K079H #WinAppRuntime.Singleton
+
 winget uninstall XPFFZHVGQWWLHB #OneNote
-winget uninstall 9N95Q1ZZPMH4 #MPEG-2 Video Extension (Has issues updating; can be reinstalled)
+winget uninstall 9NRX63209R7B #Outlook
+winget uninstall 9NFTCH6J7FHV #Power Automate
 winget uninstall 9PC1H9VN18CM #Start Experiences App, which keeps messing with the Start Menu Layout
+winget uninstall 9NC184TX90WZ #AI Handwriting Tool Ink.Handwriting
+winget uninstall 9MSMLRH6LZF3 #Notepad
+winget uninstall 9PCFS5B6T72H #Paint
+winget uninstall 9WZDNCRFJBH4 #Photos
+winget uninstall 9MZ95KL8MR0L #Snipping Tool
+winget uninstall 9WZDNCRFHWD2 #Solitaire
+
+#Uninstall Image & Video Extensions
+winget uninstall 9NCTDW2W1BH8 #Raw Image Extension
+winget uninstall 9PG2DK419DRG #Webp Image Extension
+winget uninstall 9PMMSR1CGPWG #HEIF Image Extension
+winget uninstall 9N5TDP8VCMHS #Web Media Extension
+winget uninstall 9N4D0MSMP0PT #VP9 Video Extension
+winget uninstall 9PB0TRCNRHFX #AVC Video Extension
+winget uninstall 9N4WGH0Z6VHQ #HVEC Video Extension
+winget uninstall 9N95Q1ZZPMH4 #MPEG-2 Video Extension (Has issues updating; can be reinstalled)
+winget uninstall 9MVZQVXJBQ9V #AV1 Video Extension
 
 #3rd party stuff using WinGet
 winget uninstall 9WZDNCRFJ0PK #Dropbox Lite
@@ -281,9 +304,12 @@ Write-Host "Remove Cross-Device Experience Host"
 winget uninstall 9NTXGKQ8P7N0
 Write-Host `n
 
-winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox TCUI
+#winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox TCUI
 #winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
 #winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
+
+Write-Host "Remove Remote Desktop Connection"
+mstsc.exe /uninstall
 
 Write-Output `n
 Write-Output "Note: Windows 11 will pin apps to the start menu without installing them." `n "You may need to manually unpin these apps!"
