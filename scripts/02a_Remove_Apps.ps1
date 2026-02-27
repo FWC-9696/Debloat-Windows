@@ -294,6 +294,21 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" "AutoDow
 New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" "DisableWindowsConsumerFeatures" 1
 
+#Use Legacy Windows PhotoViewer after Photos App Uninstalled
+$names = @(
+    ".bmp"
+    ".dib"
+    ".jpg"
+    ".jpeg"
+    ".jpe"
+    ".png"
+    ".gif"
+    ".tif"
+    ".tiff"
+)
+foreach($name in $names){
+    New-ItemProperty -Path "HKLM:\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" -Name $name -PropertyType String -Value "PhotoViewer.FileAssoc.Tiff" -ErrorAction SilentlyContinue
+}
 Write-Host "Uninstall Desktop Teams, if Present"
 winget uninstall Microsoft.Teams.Free
 Write-Host `n
@@ -309,7 +324,7 @@ Write-Host `n
 #winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 
 Write-Host "Remove Remote Desktop Connection"
-mstsc.exe /uninstall
+mstsc.exe /Uninstall
 
 Write-Output `n
 Write-Output "Note: Windows 11 will pin apps to the start menu without installing them." `n "You may need to manually unpin these apps!"
