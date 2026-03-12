@@ -29,10 +29,10 @@ $apps = @(
     ###Doesn't create start menu entry. See shortcuts.
 
     #HWInfo
-    REALiX.HWinfo
+   "REALiX.HWinfo"
 
     #Prime95 (Usefull for Stress Tests)
-    mersenne.prime95
+    "mersenne.prime95"
 
     #Rufus
     "Rufus.Rufus"                #Mounts ISOs
@@ -54,8 +54,11 @@ $apps = @(
 
     #Logitech
     #"Logitech.UnifyingSoftware" #Logitech Unifying Software ### DEPRECATED DO NOT USE
-    "Logitech.OptionsPlus"      #Logitech Software for consumer-series
+    #"Logitech.OptionsPlus"      #Logitech Software for consumer-series
     "Logitech.GHub"             #Logitech Software for G-series
+
+    #Dell
+    #"Dell.DisplayAndPeripheralManager" #Update Drivers for Dell Peripherals
 
     #Fan Control
     "Rem0o.FanControl"          #Can controll graphics card fan speeds

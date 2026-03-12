@@ -6,6 +6,9 @@ $Path = $MyInvocation.MyCommand.Path
 $Directory = Split-Path -Path $Path -Parent
 & pwsh.exe -File $Directory\000_Disable_Recall.ps1
 
+#Uninstall Copilot
+winget uninstall 9NHT9RB2F4HD
+
 #NVCleanstall (Updates Graphics Drivers)
 Write-Host 
 Write-Host "Checking for Nvidia Driver Updates (if NVCleanstall is installed)..."
@@ -140,20 +143,11 @@ Write-Host "Last Run: $date" `n
 Stop-Process -Name perfmon -ErrorAction SilentlyContinue
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
 
+$Path = $MyInvocation.MyCommand.Path
+$Directory = Split-Path -Path $Path -Parent
+
 #Uninstall WebView2
-Stop-Process -Name *WebView* -Force
-if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView) {
-   try {
-    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView -ErrorAction  Break
-   }
-   catch {
-    Stop-Process -Name *WebView* -Force
-    Sleep 20
-    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView -ErrorAction  Continue
-   }
-   }
-else {
-    Write-Host "WebView Folder Not Found"
-}
-Write-Host "WebView Removed"
-Write-Host ""
+& pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
+
+#Uninstall Copilot
+& pwsh.exe -File $Directory\07_Uninstall_Copilot.ps1

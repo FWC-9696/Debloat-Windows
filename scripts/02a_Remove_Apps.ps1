@@ -326,6 +326,9 @@ Write-Host `n
 Write-Host "Remove Remote Desktop Connection"
 mstsc.exe /Uninstall
 
+#####Remove Copilot Completely
+Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot
+
 Write-Output `n
 Write-Output "Note: Windows 11 will pin apps to the start menu without installing them." `n "You may need to manually unpin these apps!"
 Write-Output `n
