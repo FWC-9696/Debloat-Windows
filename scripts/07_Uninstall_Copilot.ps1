@@ -1,5 +1,6 @@
 #####Remove Copilot Completely
-Stop-Process -Name *Copilot* -Force
+Stop-Process -Name *Copilot* -Force -ErrorAction Continue
+Wait-Process -Name *Copilot*
 
 winget uninstall 9NHT9RB2F4HD #Microsoft Copilot App
 if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\Copilot) {
@@ -7,8 +8,8 @@ if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\Copilot) {
     Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot -ErrorAction  Break
    }
    catch {
-    Stop-Process -Name *WebView* -Force
-    Sleep 20
+    Stop-Process -Name *Copilot* -Force -ErrorAction Continue
+    Wait-Process -Name *Copilot*
     Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot -ErrorAction  Continue
    }
    }
@@ -56,7 +57,7 @@ if ($targetPath) {
     Write-Host "Core AI Folder moved to Temp directory." -ForegroundColor Green
 
 } else {
-    Write-Host "CoreAI folder not found. It may already be removed or named differently." -ForegroundColor Red
+    Write-Host "CoreAI folder not found. It may already be removed."
 }
 Write-Host "Copilot Removed"
 Write-Host ""

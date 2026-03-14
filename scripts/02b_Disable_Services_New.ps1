@@ -4,7 +4,7 @@
 
 $services = @(
     "BITS"                                      # Background Intelligent Transfer Service
-    #"diagnosticshub.standardcollector.service" # Microsoft (R) Diagnostics Hub Standard Collector Service
+    "diagnosticshub.standardcollector.service" # Microsoft (R) Diagnostics Hub Standard Collector Service
     "dmwappushservice"                          # WAP Push Message Routing Service (see known issues)
     #"lfsvc"                                    # Geolocation Service
     "MapsBroker"                                # Downloaded Maps Manager
@@ -19,9 +19,9 @@ $services = @(
     "WMPNetworkSvc"                             # Windows Media Player Network Sharing Service
   
     "WSearch"                                   # Windows Search
-    #"XblAuthManager"                           # Xbox Live Auth Manager
-    #"XblGameSave"                              # Xbox Live Game Save Service
-    #"XboxNetApiSvc"                            # Xbox Live Networking Service
+    "XblAuthManager"                           # Xbox Live Auth Manager
+    "XblGameSave"                              # Xbox Live Game Save Service
+    "XboxNetApiSvc"                            # Xbox Live Networking Service
     "ndu"                                       # Windows Network Data Usage Monitor
     "RasMan"                                    # Remote Access Connection Manager
 
@@ -52,17 +52,16 @@ $services = @(
     "EasyAntiCheat_EOS"                       #Easy Anti-Cheat Epic Games
     "EasyAntiCheat"                           #Easy Anti-Cheat
     "EpicOnlineServices"                      #Epic Games
-
 )
 
 foreach ($service in $services) {
     Write-Output "Trying to disable $service"
-    Get-Service -Name $service | Set-Service -StartupType Manual
+    Get-Service -Name $service -ErrorAction SilentlyContinue| Set-Service -StartupType Manual -ErrorAction SilentlyContinue
 }
 
 Set-Service HPPrintScanDoctorService -StartupType Disabled -ErrorAction SilentlyContinue
 
-Set-Service XblAuthManager -StartupType Automatic -ErrorAction SilentlyContinue #Set Xbox Live to start with computer
+#Set-Service XblAuthManager -StartupType Automatic -ErrorAction SilentlyContinue #Set Xbox Live to start with computer
 
 taskmgr /0 /startup
 

@@ -60,62 +60,62 @@ powercfg -h off
 
 Write-Output `n "Hide The Search Bar"
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" "SearchboxTaskbarMode" 0
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings" -Name IsDynamicSearchBoxEnabled -Type DWORD -Value 0  -ErrorAction SilentlyContinue  -Force #Hide Search (Win 11)
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings" -Name IsDynamicSearchBoxEnabled -Type DWORD -Value 0  -ErrorAction SilentlyContinue  -Force #Hide Search (Win 11)
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings" "IsDynamicSearchBoxEnabled" 0
-New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Search" -Name DisableSearch -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Search" -Name DisableSearch -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Search" "DisableSearch" 1
 
 Write-Output `n "Showing Scroll Bars"
-New-Item -Path "HKCU:\Control Panel\Accessibility" -Name DynamicScrollbars -Type DWORD -Value 0 -ErrorAction SilentlyContinue  -Force
+New-ItemProperty -Path "HKCU:\Control Panel\Accessibility" -Name DynamicScrollbars -Type DWORD -Value 0 -ErrorAction SilentlyContinue  -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility" "DynamicScrollbars" 0
 
 Write-Output `n "Setting Windows 10/11 Display Options"
 
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name IsBatteryPercentageEnabled -ItemType DWORD -Value 1 -ErrorAction SilentlyContinue  #Show Battery % in Taskbar
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name IsBatteryPercentageEnabled -Type DWORD -Value 1 -ErrorAction SilentlyContinue  #Show Battery % in Taskbar
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "IsBatteryPercentageEnabled" 1
 
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "AppsUseLightTheme" 0
 
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "SystemUsesLightTheme" 0
 
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name EnableTransparency -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name EnableTransparency -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "EnableTransparency" 0
 
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAL -PropertyType DWORD -Value 0 -ErrorAction SilentlyContinue -Force     #Set Taskbar to Left (0) or Center (1) (Win 11)
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarAL" 0
 
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_ShowClassicMode -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_ShowClassicMode -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Start_ShowClassicMode" 1
 
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarMn" 0
 
 Write-Output `n "Disabling Copilot"
 New-FolderForced "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot"
-New-Item -Path "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot" -Name TurnOffWindowsCopilot -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot" -Name TurnOffWindowsCopilot -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot" "TurnOffWindowsCopilot" 1
 
 Write-Output `n "Stopping Newsfeed from Opening on Hover"
-New-Item -Path "HKCU:Software\Microsoft\Windows\CurrentVersion\Feeds" -Name ShellFeedsTaskbarOpenOnHover -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:Software\Microsoft\Windows\CurrentVersion\Feeds" -Name ShellFeedsTaskbarOpenOnHover -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:Software\Microsoft\Windows\CurrentVersion\Feeds" "ShellFeedsTaskbarOpenOnHover" 0
-New-Item -Path "HKCU:Software\Microsoft\Windows\CurrentVersion\Feeds" -Name OpenOnHover -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:Software\Microsoft\Windows\CurrentVersion\Feeds" -Name OpenOnHover -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:Software\Microsoft\Windows\CurrentVersion\Feeds" "OpenOnHover" 0
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds\DSB" -ItemType Path -Force -ErrorAction SilentlyContinue
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds\DSB" -Name "OpenOnHover" -Value 0 -ItemType DWord -ErrorAction SilentlyContinue -Force
+New-FolderForced -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds\DSB"
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds\DSB" -Name "OpenOnHover" -Value 0 -Type DWord -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds\DSB" "OpenOnHover" 0
 
 Write-Output `n "Windows 11: Remove Taskbar Animations"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAnimations -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAnimations -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarAnimations" 0
 
 Write-Output `n "Remove Recommended From Start"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name HideRecommendedSection -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name HideRecommendedSection -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "HideRecommendedSection" 1
 
 Write-Output `n "Set Start Layout"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_Layout -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_Layout -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Start_Layout" 1
 
 Write-Output `n "Fix Context (Right-Click) Menu"
@@ -138,7 +138,7 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Type BINARY -Name UserPref
 #Set-ItemProperty -Path "HKCU:\Control Panel\Cursors" -Name '(Default)' -Value "Windows Default (large) (system scheme)" -Force #XL Mouse Cursor
 
 Write-Output `n "Adding 'End Task' Option To Right Click Menu"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name TaskbarEndTask -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name TaskbarEndTask -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name "TaskbarEndTask" -Value 1
 
 Write-Output `n "Changing Date/Time Format"
@@ -150,24 +150,34 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer
 Write-Output "Fixing Start Menu Options Post-November-2025 Update"
 
 Write-Output `n `t "Set start menu to list view"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name AllAppsViewMode -Type DWORD -Value 2 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name AllAppsViewMode -Type DWORD -Value 2 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name "AllAppsViewMode" -Value 2
 
 Write-Output `n `t "Hide recent apps"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name ShowRecentList -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name ShowRecentList -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name "ShowRecentList" -Value 0
 
 Write-Output `n `t "Hide frequent apps"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name ShowFrequentList -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name ShowFrequentList -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Start" -Name "ShowFrequentList" -Value 0
 
 Write-Output `n `t "Hide frequent files"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_TrackDocs -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_TrackDocs -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Start_TrackDocs" -Value 0
 
 Write-Output `n `t "Hide recommendations for tips, shortcuts, new apps, and more"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_IrisRecommendations -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_IrisRecommendations -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Start_IrisRecommendations" -Value 0
+
+Write-Output `n `t "Hide Welcome Screen"
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name NoWelcomeScreen -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoWelcomeScreen" -Value 1
+
+Write-Output `n `t "Enable Diagnostic Data Viewer"
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventViewer" -Name AllowDiagnosticDataViewer -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventViewer" -Name "AllowDiagnosticDataViewer" -Value 1
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey\" -Name EnableEventTranscript -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey\" -Name "EnableEventTranscript" -Value 1
 
 Write-Output `n "Done, Restarting Explorer..."
 taskkill /f /im explorer.exe
@@ -179,4 +189,4 @@ Write-Output `n "Trying to Show Mouse Options in Control Panel & Settings"
 control /name Microsoft.Mouse
 Start-Process ms-settings:easeofaccess-mousepointer
 Write-Output `n "REBOOT IS REQUIRED FOR SOME ITEMS!"
-Write-Output `n
+Write-Output ""
