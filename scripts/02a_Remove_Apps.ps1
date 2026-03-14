@@ -141,7 +141,7 @@ $apps = @(
     "Microsoft.Todos"                          #Microsoft To-Do
     "MicrosoftCorporationII.QuickAssist"       #Quick Assist
     "MicrosoftCorporationII.MicrosoftFamily"   #Microsoft Family Safety
-    "MicrosoftTeams"                           #Teams
+    "Microsoft.Teams.Free"                           #Teams
 
     #More Win 11 Junk
     "Windows.DevHome"
@@ -327,7 +327,27 @@ Write-Host "Remove Remote Desktop Connection"
 mstsc.exe /Uninstall
 
 #####Remove Copilot Completely
+Write-Host "Remove Copilot More Completely"
 Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot
+
+###Turn off "Let Windows Manage My Default Printer"
+Write-Host "Turn Off 'Let Windows Manage My Default Printer'"
+New-Item -Path "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Windows" -Name LegacyDefaultPrinterMode -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Windows" -Name LegacyDefaultPrinterMode -Value 1
+
+###Remove 'Get Help'
+Write-Host "Remove 'Get Help' App"
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Support" -Force
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Support" -Name DisableGetHelp -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Support" -Name DisableGetHelp -Value 1 -ErrorAction SilentlyContinue
+
+###Turn off Welcome Experience
+Write-Host "Turn off 'Windows Welcome Experience'"
+New-ItemProperty -Path "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name SubscribedContent-310093Enabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+Set-ItemProperty -Path "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name SubscribedContent-310093Enabled -Value 0
+
+###Turn off Windows Backup
+dism /online /disable-feature /featurename:WindowsBackup
 
 Write-Output `n
 Write-Output "Note: Windows 11 will pin apps to the start menu without installing them." `n "You may need to manually unpin these apps!"
