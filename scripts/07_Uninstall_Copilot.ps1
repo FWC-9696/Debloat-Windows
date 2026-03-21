@@ -37,9 +37,9 @@ foreach($proc in $procs){
 }
 
 # 1. Identify the target folder using a wildcard (handles version numbers)
-$folderPattern = "C:\Windows\SystemApps\MicrosoftWindows.Client.CoreAI_*"
+$folderPattern = "$env:windir\SystemApps\MicrosoftWindows.Client.CoreAI_*"
 $targetPath = Get-Item -Path $folderPattern -ErrorAction SilentlyContinue
-
+$random = Get-random
 if ($targetPath) {
     $fullPath = $targetPath.FullName
     Write-Host "Target identified: $fullPath" -ForegroundColor Cyan
@@ -53,8 +53,10 @@ if ($targetPath) {
     icacls $fullPath /grant administrators:F /t /c /l /q
 
     # 4. Move to Recycle Bin via Shell COM Object
-    Move-Item -Path $folderPattern -Destination "C:\Windows\Temp\" -Force
-    Write-Host "Core AI Folder moved to Temp directory." -ForegroundColor Green
+    New-Item -ItemType Directory -Path $env:systemdrive\Windows.old\$random -ErrorAction SilentlyContinue
+    Move-Item -Path $folderPattern -Destination "$env:systemdrive\Windows.old\$random" -Force
+    #Remove-Item "$env:windir\Temp\*" -Recurse -Force
+    Write-Host "Core AI Folder removed." -ForegroundColor Green
 
 } else {
     Write-Host "CoreAI folder not found. It may already be removed."

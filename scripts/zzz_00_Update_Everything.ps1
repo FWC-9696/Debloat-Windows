@@ -124,6 +124,19 @@ W32tm /resync /force
 Write-Host `n
 Write-Host "Done"
 
+#Open Resource Monitor
+Stop-Process -Name perfmon -ErrorAction SilentlyContinue
+Invoke-Expression "$env:windir\system32\perfmon.exe /res"
+
+$Path = $MyInvocation.MyCommand.Path
+$Directory = Split-Path -Path $Path -Parent
+
+#Uninstall WebView2
+& pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
+
+#Uninstall Copilot
+& pwsh.exe -File $Directory\07_Uninstall_Copilot.ps1
+
 #Updates Other Programs
 Write-Host 
 Write-Host "Checking for Software Updates..."
@@ -138,16 +151,3 @@ Write-Host "winget upgrade <ID>"
 Write-Host
 $date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 Write-Host "Last Run: $date" `n
-
-#Open Resource Monitor
-Stop-Process -Name perfmon -ErrorAction SilentlyContinue
-Invoke-Expression "$env:windir\system32\perfmon.exe /res"
-
-$Path = $MyInvocation.MyCommand.Path
-$Directory = Split-Path -Path $Path -Parent
-
-#Uninstall WebView2
-& pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
-
-#Uninstall Copilot
-& pwsh.exe -File $Directory\07_Uninstall_Copilot.ps1

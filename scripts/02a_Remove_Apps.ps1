@@ -191,10 +191,13 @@ Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUse
 
 #Uninstall more stuff using WinGet
 
+winget uninstall 9WZDNCRD1HKW #XboxIdentityProvider
+winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
+winget uninstall 9NBLGGH537C2 #Xbox Game Bar Plugin
+winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
+
 winget uninstall 9NZBF4GT040C #Web Search from Microsoft Bing
 winget uninstall 9NTXGKQ8P7N0 #Cross Device Experience Host
-winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
-winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
 winget uninstall 9N3RK8ZV2ZR8 #Widgets Platform Runtime
 winget uninstall 9PCSD6N03BKV #Windows Application Compatiblility Enhancements (WACE)
 winget uninstall 9NHT9RB2F4HD #Microsoft Copilot App
@@ -203,6 +206,7 @@ winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widge
 winget uninstall 9PLJQ12FQ3CV #WinAppRuntime.Main.1.8
 winget uninstall 9P5Z076K079H #WinAppRuntime.Singleton
 
+winget uninstall 9WZDNCRFHVN5 #Calculator
 winget uninstall XPFFZHVGQWWLHB #OneNote
 winget uninstall 9NRX63209R7B #Outlook
 winget uninstall 9NFTCH6J7FHV #Power Automate
@@ -213,6 +217,8 @@ winget uninstall 9PCFS5B6T72H #Paint
 winget uninstall 9WZDNCRFJBH4 #Photos
 winget uninstall 9MZ95KL8MR0L #Snipping Tool
 winget uninstall 9WZDNCRFHWD2 #Solitaire
+winget uninstall 9PF3QC8DVGVD #English Speech Pack
+
 
 #Uninstall Image & Video Extensions
 winget uninstall 9NCTDW2W1BH8 #Raw Image Extension
@@ -255,7 +261,6 @@ $shortcuts = @(
 "Booking.com.url"
 "Forge of Empires.url"
 )
-
 foreach ($shortcut in $shortcuts) {
 Remove-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\$shortcut" -ErrorAction SilentlyContinue
 }
@@ -324,7 +329,12 @@ Write-Host `n
 #winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 
 Write-Host "Remove Remote Desktop Connection"
-mstsc.exe /Uninstall
+try {
+    mstsc.exe /Uninstall
+}
+catch {
+    Write-Host "Remote Desktop is Not Installed"
+}
 
 #####Remove Copilot More Completely
 Write-Host "Remove Copilot More Completely"

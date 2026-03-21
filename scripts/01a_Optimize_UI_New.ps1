@@ -92,6 +92,9 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarMn" 0
 
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarFlashing -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarFlashing" 0
+
 Write-Output `n "Disabling Copilot"
 New-FolderForced "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot"
 New-ItemProperty -Path "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot" -Name TurnOffWindowsCopilot -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
@@ -174,10 +177,12 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoWelcomeScreen" -Value 1
 
 Write-Output `n `t "Enable Diagnostic Data Viewer"
+New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventViewer" -ErrorAction SilentlyContinue -Force
 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventViewer" -Name AllowDiagnosticDataViewer -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventViewer" -Name "AllowDiagnosticDataViewer" -Value 1
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey\" -Name EnableEventTranscript -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey\" -Name "EnableEventTranscript" -Value 1
+New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey" -ErrorAction SilentlyContinue -Force
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey" -Name EnableEventTranscript -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey" -Name "EnableEventTranscript" -Value 1
 
 Write-Output `n "Done, Restarting Explorer..."
 taskkill /f /im explorer.exe
