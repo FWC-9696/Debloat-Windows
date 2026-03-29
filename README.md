@@ -2,7 +2,7 @@
 
 Note that the original Debloat-Windows-10 is generally unmaintained and is not very useful for Windows 11.
 
-This fork is designed for a lighter debloat (that doesn't break important windows features) for gaming and general use.
+This fork is designed for a complete debloat that also removes as many WebView2, Recall, and Copilot AI features as possible. It is unlikely to break any core Windows features, but still use with caution!
 
 This fork includes additonal utilities in the `scripts` and `utils` folders.
 
