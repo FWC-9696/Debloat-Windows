@@ -5,42 +5,46 @@ Wait-Process -Name *Copilot*
 winget uninstall 9NHT9RB2F4HD #Microsoft Copilot App
 if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\Copilot) {
    try {
-    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot -ErrorAction  Break
+    Write-Host "Attempting Copilot folder removal..." -ForegroundColor Cyan
+    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot -ErrorAction Continue
    }
    catch {
+    Write-Host "Attempting Copilot folder removal..." -ForegroundColor Yellow
     Stop-Process -Name *Copilot* -Force -ErrorAction Continue
     Wait-Process -Name *Copilot*
-    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot -ErrorAction  Continue
+    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\Copilot -ErrorAction Continue
    }
    }
 else {
-    Write-Host "Copilot Not Found"
+    Write-Host ""
+    Write-Host "Copilot not found. It may already be removed." -ForegroundColor Yellow
 }
 Write-Host ""
-Write-Host "Remove Core AI Features"
-
-$procs = @(
-    "Copilot"    
-    "ShellExperienceHost"
-    "TextInputHost"
-    "AIXHost"
-    "Explorer"
-)
-foreach($proc in $procs){
-    Write-Host "Stopping $proc..." -ForegroundColor Yellow
-    Stop-Process -Name $proc -Force -ErrorAction SilentlyContinue
-    
-    # 2. Wait for the process to release handles
-    Write-Host "Waiting for process to exit..." -ForegroundColor Cyan
-    Wait-Process -Name $proc -ErrorAction SilentlyContinue
-    Write-Host "$proc process terminated"
-}
 
 # 1. Identify the target folder using a wildcard (handles version numbers)
 $folderPattern = "$env:windir\SystemApps\MicrosoftWindows.Client.CoreAI_*"
 $targetPath = Get-Item -Path $folderPattern -ErrorAction SilentlyContinue
 $random = Get-random
 if ($targetPath) {
+
+    Write-Host "Remove Core AI Features"
+    $procs = @(
+        "Copilot"    
+        "ShellExperienceHost"
+        "TextInputHost"
+        "AIXHost"
+        "Explorer"
+    )
+    foreach($proc in $procs){
+        Write-Host "Stopping $proc..." -ForegroundColor Yellow
+        Stop-Process -Name $proc -Force -ErrorAction SilentlyContinue
+    
+        # 2. Wait for the process to release handles
+        Write-Host "Waiting for process to exit..." -ForegroundColor Cyan
+        Wait-Process -Name $proc -ErrorAction SilentlyContinue
+        Write-Host "$proc process terminated"
+    }
+    
     $fullPath = $targetPath.FullName
     Write-Host "Target identified: $fullPath" -ForegroundColor Cyan
 
@@ -59,7 +63,7 @@ if ($targetPath) {
     Write-Host "Core AI Folder removed." -ForegroundColor Green
 
 } else {
-    Write-Host "CoreAI folder not found. It may already be removed."
+    Write-Host "CoreAI folder not found. It may already be removed." -ForegroundColor Yellow
 }
-Write-Host "Copilot Removed"
 Write-Host ""
+Write-Host "Copilot & AI features removed" -ForegroundColor Green

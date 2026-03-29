@@ -3,10 +3,16 @@
 # It should not cause issues, but services can always be re-enabled using services.msc
 
 Get-Service | Where-Object { 
-    $_.Status -ne 'Running' #-and $_.StartupType -eq 'Automatic'
+    $_.Status -ne 'Running'
 } | ForEach-Object { 
-    Write-Host "Changing service: $($_.Name) ($($_.DisplayName)) to Manual..." -ForegroundColor Yellow
-    Set-Service -Name $_.Name -StartupType Manual -ErrorAction SilentlyContinue
+    $service = $_.Name
+    try {
+        Set-Service -Name $service -StartupType Manual -ErrorAction Stop
+        Write-Host "Set $service to Manual." -ForegroundColor Yellow
+    }
+    catch {
+        Write-Host "Could not set $service to Manual."
+    }
 }
 
 $services = @(
@@ -36,8 +42,13 @@ $services = @(
     "ClipSVC"                                   # Client License Service (ClipSVC). Provides infrastructure support for the Microsoft Store. This service is started on demand and if disabled applications bought using the Microsoft Store will not behave correctly.
     )
 foreach ($service in $services) {
-    Write-Host "Setting $service to Automatic" -ForegroundColor Green
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Automatic -ErrorAction SilentlyContinue
+    try {
+        Get-Service -Name $service -ErrorAction Stop | Set-Service -StartupType Automatic -ErrorAction Stop
+        Write-Host "Set $service to Automatic." -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Could not set $service to Automatic."
+    }
 }
 
 $services = @(
@@ -115,10 +126,14 @@ $services = @(
     "SensorService"                             #Sensor Service
     "Sensorsrv"                                 #Sensor Data Service
 )
-
 foreach ($service in $services) {
-    Write-Host "Setting $service to Manual" -ForegroundColor Yellow
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual -ErrorAction SilentlyContinue
+    try {
+        Get-Service -Name $service -ErrorAction Stop | Set-Service -StartupType Manual -ErrorAction Stop
+        Write-Host "Set $service to Manual." -ForegroundColor Yellow
+    }
+    catch {
+        Write-Host "Could not set $service to Manual."
+    }
 }
 
 $services=@(
@@ -128,8 +143,13 @@ $services=@(
     "RemoteRegistry"                            #Remote Registry
 )
 foreach ($service in $services) {
-    Write-Host "Setting $service to Disabled" -ForegroundColor Red
-    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled -ErrorAction SilentlyContinue
+    try {
+        Get-Service -Name $service -ErrorAction Stop| Set-Service -StartupType Disabled -ErrorAction Stop
+        Write-Host "Set $service to Disabled." -ForegroundColor Red
+    }
+    catch {
+        Write-Host "Could not set $service to Disabled."
+    }
 }
 
 taskmgr /0 /startup
