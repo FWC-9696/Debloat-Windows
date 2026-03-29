@@ -15,7 +15,7 @@ $apps = @(
     "9PLDPG46G47Z"             #Xbox Insider Hub
     "9MZ95KL8MR0L"             #Snip and Sketch (New Snipping Tool)
     "9N8WTRRSQ8F7"             #Diagnostic Data Viewer
-    "9WZDNCRFJBH4"             #Microsoft Photos
+    #"9WZDNCRFJBH4"             #Microsoft Photos
     "9N8G5RFZ9XK3"             #Windows Terminal Preview
     #"9WZDNCRFJ3P2"             #Windows Movies & TV
     #"9N95Q1ZZPMH4"             #MPEG-2 Video Extension

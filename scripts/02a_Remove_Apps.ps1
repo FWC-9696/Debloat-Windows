@@ -23,7 +23,7 @@ $apps = @(
     "Microsoft.BingTranslator"
     "Microsoft.BingWeather"
     "Microsoft.FreshPaint"
-    "Microsoft.GamingServices"            #Can be reinstalled via Xbox app
+    #"Microsoft.GamingServices"            #Can be reinstalled via Xbox app
     "Microsoft.Microsoft3DViewer"
     "Microsoft.MicrosoftOfficeHub"
     "Microsoft.MicrosoftPowerBIForWindows"
@@ -47,7 +47,7 @@ $apps = @(
     "Microsoft.Xbox.TCUI"
     #"Microsoft.GamingApp"           #Xbox App
     "Microsoft.XboxApp"             #Xbox Console Companion. Need this on Win 11 to check Xbox Network Status.
-    #"Microsoft.XboxGamingOverlay"   #Xbox Game Bar
+    "Microsoft.XboxGamingOverlay"   #Xbox Game Bar
     "Microsoft.YourPhone"
     "Microsoft.ZuneMusic"
     "Microsoft.ZuneVideo"
@@ -191,7 +191,7 @@ Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUse
 
 #Uninstall more stuff using WinGet
 
-winget uninstall 9WZDNCRD1HKW #XboxIdentityProvider
+#winget uninstall 9WZDNCRD1HKW #XboxIdentityProvider
 winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
 winget uninstall 9NBLGGH537C2 #Xbox Game Bar Plugin
 winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
@@ -206,7 +206,7 @@ winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widge
 winget uninstall 9PLJQ12FQ3CV #WinAppRuntime.Main.1.8
 winget uninstall 9P5Z076K079H #WinAppRuntime.Singleton
 
-winget uninstall 9WZDNCRFHVN5 #Calculator
+#winget uninstall 9WZDNCRFHVN5 #Calculator
 winget uninstall XPFFZHVGQWWLHB #OneNote
 winget uninstall 9NRX63209R7B #Outlook
 winget uninstall 9NFTCH6J7FHV #Power Automate
@@ -214,8 +214,8 @@ winget uninstall 9PC1H9VN18CM #Start Experiences App, which keeps messing with t
 winget uninstall 9NC184TX90WZ #AI Handwriting Tool Ink.Handwriting
 winget uninstall 9MSMLRH6LZF3 #Notepad
 winget uninstall 9PCFS5B6T72H #Paint
-winget uninstall 9WZDNCRFJBH4 #Photos
-winget uninstall 9MZ95KL8MR0L #Snipping Tool
+#winget uninstall 9WZDNCRFJBH4 #Photos
+#winget uninstall 9MZ95KL8MR0L #Snipping Tool
 winget uninstall 9WZDNCRFHWD2 #Solitaire
 winget uninstall 9PF3QC8DVGVD #English Speech Pack
 
@@ -324,10 +324,16 @@ Write-Host "Remove Cross-Device Experience Host"
 winget uninstall 9NTXGKQ8P7N0
 Write-Host `n
 
+###Reinstall some apps
+winget install 9WZDNCRFHVN5 --accept-source-agreements --accept-package-agreements #Calculator
+#winget install 9WZDNCRFJBH4 --accept-source-agreements --accept-package-agreements #Photos. Has AI, but still unfortunately best way to trim video
+#winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
+#winget install 9MV0B5HZVK9Z --accept-source-agreements --accept-package-agreements #Xbox, will get reinstalled automatically
+winget install 9WZDNCRD1HKW --accept-source-agreements --accept-package-agreements #reinstall XboxIdentityProvider
 #winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox TCUI
 #winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
-#winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 
+###Remove Remote Desktop Connection
 Write-Host "Remove Remote Desktop Connection"
 try {
     mstsc.exe /Uninstall

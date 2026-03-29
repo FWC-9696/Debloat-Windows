@@ -16,10 +16,11 @@ $apps = @(
     "Guru3D.RTSS"                    #RivaTuner Statistics Server
     "LOOT.LOOT"                      #Load Order Optimization Tool (Modloader Used for Some Games)
     ###"PlayStation.DualSenseFWUpdater" #DualShock (PS5 Controller) Firmware Updater -- No longer works
-    "Radmin.VPN"                     #Radmin VPN (Replaces LogMeIn Hamachi or LAN)
+    "Famatech.RadminVPN"                     #Radmin VPN (Replaces LogMeIn Hamachi or LAN)
     "Logitech.GHUB"                  #Logitech G Hub
     #"ViGEm.ViGEmBus"                 #Nefarius Gamepad Emulator, Subcomponent of DS4Windows
     "MHNexus.HxD"                      #Hex editor
+    "FlawlessWidescreen.FlawlessWidescreen" FlawlessWidescreen
 )
 
 foreach ($app in $apps) {

@@ -1,3 +1,17 @@
+$services = @(
+    "tzautoupdate" #Automatically sets the system time zone.
+    "lfsvc"        #This service monitors the current location of the system and manages geofences (a geographical location with associated events).  If you turn off this service, applications will be unable to use or receive notifications for geolocation or geofences.
+    "W32Time"      #Maintains date and time synchronization on all clients and servers in the network. If this service is stopped, date and time synchronization will be unavailable. If this service is disabled, any services that explicitly depend on it will fail to start.
+    "wuauserv"     #Windows Update Service
+    "InstallService" #Windows Store Installer Service
+    "AppXSvc"      #Package Install Service
+)
+
+foreach ($service in $services) {
+    Write-Output "Starting $service"
+    Start-Service $service
+}
+
 #Stop WebView
 Stop-Process -Name *WebView* -Force
 
@@ -6,8 +20,15 @@ $Path = $MyInvocation.MyCommand.Path
 $Directory = Split-Path -Path $Path -Parent
 & pwsh.exe -File $Directory\000_Disable_Recall.ps1
 
-#Uninstall Copilot
-winget uninstall 9NHT9RB2F4HD
+#Dell Display & Peripheral Manager
+Write-Host
+Write-Host "Launching Dell Display & Peripheral Manager..."
+try {
+    Start-Process "$env:ProgramFiles\Dell\Dell Display and Peripheral Manager\DDPM.exe"
+}
+catch {
+    Write-Host "Dell Display & Peripheral Manager is not installed."
+}
 
 #NVCleanstall (Updates Graphics Drivers)
 Write-Host 
@@ -90,17 +111,6 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\LocationAndSen
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name Value -Value Allow
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged" -Name Value -Value Allow
 
-$services = @(
-    "tzautoupdate" #Automatically sets the system time zone.
-    "lfsvc"        #This service monitors the current location of the system and manages geofences (a geographical location with associated events).  If you turn off this service, applications will be unable to use or receive notifications for geolocation or geofences.
-    "W32Time"      #Maintains date and time synchronization on all clients and servers in the network. If this service is stopped, date and time synchronization will be unavailable. If this service is disabled, any services that explicitly depend on it will fail to start.
-)
-
-foreach ($service in $services) {
-    Write-Output "Setting $service to Automatic"
-    Get-Service -Name $service | Set-Service -StartupType Automatic
-}
-
 #Set Time and Time Zone Automatically
 ##Toggle OFF
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" "Type" "NoSync"
@@ -125,7 +135,7 @@ Write-Host `n
 Write-Host "Done"
 
 #Open Resource Monitor
-Stop-Process -Name perfmon -ErrorAction SilentlyContinue
+Stop-Process -Name perfmon -ErrorAction SilentlyContinue -Force
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
 
 $Path = $MyInvocation.MyCommand.Path
