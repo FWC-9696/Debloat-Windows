@@ -1,3 +1,10 @@
+Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
+Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
+
+Write-Host ""
+Write-Output "Elevating priviledges for this process"
+do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
+
 $services = @(
     "tzautoupdate" #Automatically sets the system time zone.
     "lfsvc"        #This service monitors the current location of the system and manages geofences (a geographical location with associated events).  If you turn off this service, applications will be unable to use or receive notifications for geolocation or geofences.
@@ -58,22 +65,6 @@ catch {
     Write-Host "Windows Store is not installed, or an error has occured."
 }
 
-#Updates Windows
-New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
-Set-ItemProperty  -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Value 1
-
-New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name SetAllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
-Set-ItemProperty  -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name SetAllowOptionalContent -Value 1
-
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name IsContinuousInnovationOptedIn -Type DWORD -Value 1 -ErrorAction SilentlyContinue
-Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "IsContinuousInnovationOptedIn" "1"
-
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name AllowMUUpdateService -Type DWORD -Value 1 -Force -ErrorAction SilentlyContinue
-Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "AllowMUUpdateService" "1"
-
-New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name RestartNotificationsAllowed2 -Type DWORD -Value 1 -Force -ErrorAction SilentlyContinue
-Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "RestartNotificationsAllowed2" "1"
-
 Write-Host 
 Write-Host "Checking for Windows Updates..." -ForegroundColor DarkCyan
 Start-Process ms-settings:windowsupdate -WindowStyle Minimized
@@ -94,12 +85,6 @@ catch{Write-Host "PowerToys is not installed."}
 #catch{Write-Host "Firefox is not installed."}
 
 #This script will set the date/time based on location. Helpful for laptops.
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
-
-Write-Host ""
-Write-Output "Elevating priviledges for this process"
-do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 
 Write-Host ""
 Write-Host "Enabling Location and Setting Clock to Automatic" -ForegroundColor DarkCyan
@@ -165,3 +150,30 @@ Write-Host "winget upgrade <ID>"
 Write-Host
 $date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 Write-Host "Last Run: $date" `n -ForegroundColor Green
+
+#Update Windows Update Policies in the background
+$command={
+Start-Sleep 30
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name AllowOptionalContent -Value "-"
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name SetAllowOptionalContent -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name SetAllowOptionalContent -Value "-" 
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name IsContinuousInnovationOptedIn -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "IsContinuousInnovationOptedIn" "1"
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name AllowMUUpdateService -Type DWORD -Value 1 -Force -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "AllowMUUpdateService" "1"
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name RestartNotificationsAllowed2 -Type DWORD -Value 1 -Force -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "RestartNotificationsAllowed2" "1"
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name AutoRebootLimitInDays -Type DWORD -Value 7 -Force -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "AutoRebootLimitInDays" "7" 
+
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name FlightSettingsMaxPauseDays -Type DWORD -Value 1 -Force -ErrorAction SilentlyContinue
+Set-ItemProperty  -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "FlightSettingsMaxPauseDays" "3652"
+}
+Start-Process pwsh -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command $command" -WindowStyle Hidden
