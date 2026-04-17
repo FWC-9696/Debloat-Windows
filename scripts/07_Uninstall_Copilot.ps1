@@ -2,7 +2,6 @@
 Stop-Process -Name *Copilot* -Force -ErrorAction Continue
 Wait-Process -Name *Copilot*
 
-winget uninstall 9NHT9RB2F4HD #Microsoft Copilot App
 if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\Copilot) {
    try {
     Write-Host "Attempting Copilot folder removal..." -ForegroundColor Cyan
@@ -65,5 +64,22 @@ if ($targetPath) {
 } else {
     Write-Host "CoreAI folder not found. It may already be removed." -ForegroundColor Yellow
 }
+
 Write-Host ""
+$session = New-PSSession -UseWindowsPowerShell
+Invoke-Command -Session $session {
+$apps = @(
+    "Microsoft.Copilot"
+)
+foreach ($app in $apps) {
+    Write-Output "Trying to remove $app"
+
+    Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction Continue
+
+    Get-AppXProvisionedPackage -Online |
+        Where-Object DisplayName -EQ $app |
+        Remove-AppxProvisionedPackage -Online
+}
+}
+
 Write-Host "Copilot & AI features removed" -ForegroundColor Green

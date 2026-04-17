@@ -171,6 +171,9 @@ $apps = @(
 
     # apps which other apps depend on
     #"Microsoft.Advertising.Xaml"
+
+    #Copilot Removal
+    "Microsoft.Copilot"
 )
 
 foreach ($app in $apps) {
