@@ -15,9 +15,11 @@ Also, note that gaming-related apps and services will remain intact or will be r
 1. Install/Upgrade WinGet: https://apps.microsoft.com/detail/9nblggh4nns1
 2. Use the "PowerShell v1.0 (Administrator)" shortcut (in the main folder) to run setup commands and install the newest PowerShell version:
 
-    `winget install Microsoft.Powershell --accept-source-agreements --accept-package-agreements`
+    `winget install --id Microsoft.PowerShell --source winget --installer-type wix --accept-source-agreements --accept-package-agreements`
+   
+   NOTE: Microsoft is trying to deprecate the MSI installation (`--installer-type wix`) of PowerShell Core from winget. The MSI version is a system installation, and the "modern" MSIX version is not. If the MSIX version is installed, the shortcuts will not work. However, the scripts can still be run just fine from within PowerShell Core MSIX version.
 
-3. Once the new PowerShell is installed, Use the PowerShell v7.x (Administrator)" shortcut to run the following:
+4. Once the new PowerShell is installed, Use the PowerShell v7.x (Administrator)" shortcut to run the following:
 
     `Set-ExecutionPolicy Unrestricted`
 
