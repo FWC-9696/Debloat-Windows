@@ -39,11 +39,11 @@ $domains = @(
 
 Clear-Content -Path $hostsFilePath #Clears Host File
 foreach ($domian in $domains){
-       Add-Content -Path $hostsFilePath $domian
-    }
-    Write-Host "Write Successful.." -ForegroundColor Green -BackgroundColor Black
+      Add-Content -Path $hostsFilePath $domian
+   }
 
-$hostsFilePath = "$env:SystemRoot\System32\drivers\etc\hosts"
+Write-Host "Write Successful.." -ForegroundColor Green -BackgroundColor Black
+
 $hostsFileSize = (Get-Item $hostsFilePath).Length
 
 if ($hostsFileSize -gt 135KB) {

@@ -28,6 +28,7 @@ $services = @(
     "SENS"                                      # System Event Notificaton Service
     "SystemEventsBroker"                        # System Event Broker
     "Schedule"                                  # Task Schedluer
+    "Spooler"                                   # Print Spooler
 
     #Other Services for Time & Package Installers
     "tzautoupdate"                              # Time Zone Auto Update
@@ -149,6 +150,23 @@ foreach ($service in $services) {
     }
     catch {
         Write-Host "Could not set $service to Disabled."
+    }
+}
+
+#Below Services Needed for Windows Updates
+$services=@(
+    "AppReadiness"               #Gets apps ready for use the first time a user signs in to this PC and when adding new apps. Needed for Windows Updates
+    "BITS"                       #Background Intelligent Transfer Service
+    "CryptSvc"                   #Cryptographic Service
+    "wuauserv"                   #Remote Registry
+)
+foreach ($service in $services) {
+    try {
+        Get-Service -Name $service -ErrorAction Stop| Set-Service -StartupType Automatic -ErrorAction Stop
+        Write-Host "Set $service to Automatic." -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Could not set $service to Automatic."
     }
 }
 

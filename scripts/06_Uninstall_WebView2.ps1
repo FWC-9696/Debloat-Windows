@@ -7,7 +7,7 @@ if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView) {
    catch {
     Stop-Process -Name *WebView* -Force
     Wait-Process -Name *WebView*
-    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView -ErrorAction  Continue
+    Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView -ErrorAction Continue
     Write-Host "WebView Removed" -ForegroundColor Green
    }
    }

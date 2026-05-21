@@ -8,21 +8,53 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "SvcHostSplitThr
 Write-Host `n "Changing Kill Service Wait Time" 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "WaitToKillServiceTimeout" -Value 2000
 
+# Reset all power schemes to system defaults
+powercfg /restoredefaultschemes
+
 #Turn off Power Throttling
 Write-Host  `n "Turning off Power Throttling" 
 New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -ErrorAction SilentlyContinue
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Name PowerThrottlingOff -Type DWORD -Value 1 -ErrorAction SilentlyContinue
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" "PowerThrottlingOff" -Value 1
 
-#Turn on Power Saver Always
+#Turn on Power Saver Always on Battery
 Write-Host `n "Turn on Battery Saver"
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
-powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
+powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 0
 powercfg /S SCHEME_CURRENT
+
+#Set CPU to 100% on AC and Power Saver on Battery
+# --- AC POWER SETTINGS (Plugged In) ---
+# Set Minimum and Maximum Processor State to 100%
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 100
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
+
+# --- DC POWER SETTINGS (On Battery) ---
+# Allow the CPU to drop down to 5% when idle to save power
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 5
+# Cap the maximum speed at 85% to prevent heavy battery drain and heat
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
 
 #Turn ON CPU Core Parking
 Write-Host `n "Turn on CPU Core Parking" 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" "Attributes" -Value 1
+
+# --- AC POWER: DISABLE CORE PARKING ---
+# Force 100% of your CPU cores to remain active/unparked at all times
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor CPMINCORES 100
+
+# --- DC POWER (BATTERY): ENABLE CORE PARKING ---
+# Allow the OS to park up to 95% of the cores if the system is idling
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor CPMINCORES 5
+
+# --- APPLY CHANGES ---
+powercfg /setactive SCHEME_CURRENT
+
+Write-Host "Core parking explicitly configured: Disabled on AC, Optimized on Battery." -ForegroundColor Green
+
+# --- APPLY CHANGES ---
+# Refresh the power subsystem to make the changes take effect immediately
+powercfg /setactive SCHEME_CURRENT
 
 #Turn off network throttling
 Write-Host `n "Turn off Network Throttling" 
@@ -76,11 +108,12 @@ Write-Host `n "Clear Paging File on Shutdown"
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "ClearPageFileAtShutdown" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" "ClearPageFileAtShutdown" -Value 1 -Type DWord
 
-#Enable Connected Standby
-Write-Host `n "Enable Modern Standby Network Connectivity (AC Power)"
-New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "ACSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
-Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "ACSettingIndex" -Value 1 -Type DWord
+#Enable Connected Standby -- !!!!!This confilcts with CPU Core Parking. Do not un-comment for max performance on AC power.!!!!!
+#Write-Host `n "Enable Modern Standby Network Connectivity (AC Power)"
+#New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -ErrorAction SilentlyContinue -Force
+#New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "ACSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
+#Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "ACSettingIndex" -Value 1 -Type DWord
 
-Write-Host `n "Enable Modern Standby Network Connectivity (Battery Power)"
-New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "DCSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
-Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "DCSettingIndex" -Value 1 -Type DWord
+#Write-Host `n "Enable Modern Standby Network Connectivity (Battery Power)"
+#New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "DCSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
+#Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "DCSettingIndex" -Value 1 -Type DWord

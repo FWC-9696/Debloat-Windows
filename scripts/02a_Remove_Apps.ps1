@@ -210,7 +210,7 @@ winget uninstall 9PLJQ12FQ3CV #WinAppRuntime.Main.1.8
 winget uninstall 9P5Z076K079H #WinAppRuntime.Singleton
 
 #winget uninstall 9WZDNCRFHVN5 #Calculator
-winget uninstall XPFFZHVGQWWLHB #OneNote
+#winget uninstall XPFFZHVGQWWLHB #OneNote. Can hang or take a while.
 winget uninstall 9NRX63209R7B #Outlook
 winget uninstall 9NFTCH6J7FHV #Power Automate
 winget uninstall 9PC1H9VN18CM #Start Experiences App, which keeps messing with the Start Menu Layout

@@ -5,6 +5,9 @@ Write-Host ""
 Write-Output "Elevating priviledges for this process"
 do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 
+#Stop WebView
+Stop-Process -Name *WebView* -Force
+
 $services = @(
     "tzautoupdate" #Automatically sets the system time zone.
     "lfsvc"        #This service monitors the current location of the system and manages geofences (a geographical location with associated events).  If you turn off this service, applications will be unable to use or receive notifications for geolocation or geofences.
@@ -12,6 +15,10 @@ $services = @(
     "wuauserv"     #Windows Update Service
     "InstallService" #Windows Store Installer Service
     "AppXSvc"      #Package Install Service
+    "AppReadiness"               #Gets apps ready for use the first time a user signs in to this PC and when adding new apps. Needed for Windows Updates
+    "BITS"                       #Background Intelligent Transfer Service
+    "CryptSvc"                   #Cryptographic Service
+    "wuauserv"                   #Remote Registry
 )
 
 foreach ($service in $services) {
@@ -24,12 +31,11 @@ foreach ($service in $services) {
     }
 }
 
-#Stop WebView
-Stop-Process -Name *WebView* -Force
 
-#Run Disable_Recall Script
 $Path = $MyInvocation.MyCommand.Path
 $Directory = Split-Path -Path $Path -Parent
+
+#Run Disable_Recall Script
 & pwsh.exe -File $Directory\000_Disable_Recall.ps1
 
 #Dell Display & Peripheral Manager
@@ -45,7 +51,7 @@ catch {
 #NVCleanstall (Updates Graphics Drivers)
 Write-Host 
 Write-Host "Checking for Nvidia Driver Updates (if NVCleanstall is installed)..." -ForegroundColor DarkCyan
-Stop-Process -Name NVCleanstall -ErrorAction SilentlyContinue
+Stop-Process -Name NVCleanstall -ErrorAction SilentlyContinue -Force
 try{Start-Process $env:ProgramFiles\NVCleanstall\NVCleanstall.exe -NoNewWindow}
 catch{Write-Host "NVCleanstall is not installed."}
 
@@ -124,7 +130,7 @@ Write-Host "Done"
 Write-Host ""
 
 #Open Resource Monitor
-Stop-Process -Name perfmon -ErrorAction SilentlyContinue
+Stop-Process -Name perfmon -ErrorAction SilentlyContinue -Force
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
 
 $Path = $MyInvocation.MyCommand.Path

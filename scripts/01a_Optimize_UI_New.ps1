@@ -141,6 +141,7 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Type BINARY -Name UserPref
 #Set-ItemProperty -Path "HKCU:\Control Panel\Cursors" -Name '(Default)' -Value "Windows Default (large) (system scheme)" -Force #XL Mouse Cursor
 
 Write-Output `n "Adding 'End Task' Option To Right Click Menu"
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -ErrorAction SilentlyContinue -Force
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name TaskbarEndTask -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name "TaskbarEndTask" -Value 1
 

@@ -11,6 +11,7 @@ $Recall = (dism /Online /Get-FeatureInfo /FeatureName:Recall)
 #Disable Experimental AI Agentic Features
 Write-Host ""
 Write-Host "Disable AI Agent Features" -ForegroundColor DarkCyan
+New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\IsoEnvBroker" -ErrorAction SilentlyContinue -Force
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\IsoEnvBroker" -Name Enabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\IsoEnvBroker" -Name "Enabled" -Value 0
 
