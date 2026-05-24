@@ -16,9 +16,10 @@ $services = @(
     "InstallService" #Windows Store Installer Service
     "AppXSvc"      #Package Install Service
     "AppReadiness"               #Gets apps ready for use the first time a user signs in to this PC and when adding new apps. Needed for Windows Updates
-    "BITS"                       #Background Intelligent Transfer Service
+    #"BITS"                       #Background Intelligent Transfer Service
     "CryptSvc"                   #Cryptographic Service
     "wuauserv"                   #Remote Registry
+    "Spooler"                    #Print Spooler
 )
 
 foreach ($service in $services) {

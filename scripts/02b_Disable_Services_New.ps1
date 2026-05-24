@@ -118,7 +118,6 @@ $services = @(
     "EABackgroundService"                     #EA Background Service
 
     #Print & Scan
-    "Spooler"                                 #Print Spooler
     "stisvc"                                  #Provides image acquisition services for scanners and cameras
 
     #Special Services for Touch, Bluetooth, & Screen rotation
@@ -145,7 +144,7 @@ $services=@(
 )
 foreach ($service in $services) {
     try {
-        Get-Service -Name $service -ErrorAction Stop| Set-Service -StartupType Disabled -ErrorAction Stop
+        Get-Service -Name $service -ErrorAction Stop | Set-Service -StartupType Disabled -ErrorAction Stop
         Write-Host "Set $service to Disabled." -ForegroundColor Red
     }
     catch {
@@ -159,6 +158,7 @@ $services=@(
     "BITS"                       #Background Intelligent Transfer Service
     "CryptSvc"                   #Cryptographic Service
     "wuauserv"                   #Remote Registry
+    "Spooler"                                 #Print Spooler
 )
 foreach ($service in $services) {
     try {
