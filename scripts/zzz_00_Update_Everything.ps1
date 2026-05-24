@@ -83,6 +83,19 @@ Write-Host "Checking for PowerToys Updates..." -ForegroundColor DarkCyan
 try{Start-Process $env:LOCALAPPDATA\PowerToys\PowerToys.Update.exe -Verb RunAs -WindowStyle Minimized}
 catch{Write-Host "PowerToys is not installed."}
 
+$Path = $MyInvocation.MyCommand.Path
+$Directory = Split-Path -Path $Path -Parent
+
+#Start Caffeine
+Write-Host
+Write-Host "Starting Caffeine..." -ForegroundColor DarkCyan
+try {
+   & pwsh.exe -File $Directory\..\utils\caffeine.ps1
+}
+catch {
+    "Could Not Start Caffiene"
+}
+
 #Write-Host "Checking for Edge Updates in the background..."
 #Start-Process ${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe
 #Write-Host
@@ -133,9 +146,6 @@ Write-Host ""
 #Open Resource Monitor
 Stop-Process -Name perfmon -ErrorAction SilentlyContinue -Force
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
-
-$Path = $MyInvocation.MyCommand.Path
-$Directory = Split-Path -Path $Path -Parent
 
 #Uninstall WebView2
 & pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
