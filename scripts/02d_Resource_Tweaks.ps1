@@ -1,3 +1,6 @@
+# Reset all power schemes to system defaults
+powercfg /restoredefaultschemes
+
 #Set Service Host Split Threshold (Reduces System Processes)
 $SvcHostSplit = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1kb
 Write-Host `n "This computer has $SvcHostSplit KB of physical RAM"
@@ -7,9 +10,6 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "SvcHostSplitThr
 #Wait to kill services
 Write-Host `n "Changing Kill Service Wait Time" 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "WaitToKillServiceTimeout" -Value 2000
-
-# Reset all power schemes to system defaults
-powercfg /restoredefaultschemes
 
 #Turn off Power Throttling
 Write-Host  `n "Turning off Power Throttling" 
@@ -34,6 +34,16 @@ powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
 powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 5
 # Cap the maximum speed at 85% to prevent heavy battery drain and heat
 powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
+
+# --- UNHIDE PERFORMANCE BOOST MODE IN REGISTRY ---
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\be337238-0d82-4146-a960-4f3749d470c7" "Attributes" -Value 2
+
+# --- FORCE MAXIMUM FREQUENCY ENGAGEMENT ---
+# AC Power: Force "Aggressive" frequency scaling (Locks at max base/turbo clock)
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor PERFBOOSTMODE 2
+
+# DC Power (Battery): Set to "Efficient Aggressive" (Allows scaling down on battery)
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PERFBOOSTMODE 3
 
 #Turn ON CPU Core Parking
 Write-Host `n "Turn on CPU Core Parking" 

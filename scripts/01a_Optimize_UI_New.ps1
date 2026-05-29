@@ -69,31 +69,41 @@ Write-Output `n "Showing Scroll Bars"
 New-ItemProperty -Path "HKCU:\Control Panel\Accessibility" -Name DynamicScrollbars -Type DWORD -Value 0 -ErrorAction SilentlyContinue  -Force
 Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility" "DynamicScrollbars" 0
 
-Write-Output `n "Setting Windows 10/11 Display Options"
-
+Write-Output `n "Show Battery Percentage in Taskbar"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name IsBatteryPercentageEnabled -Type DWORD -Value 1 -ErrorAction SilentlyContinue  #Show Battery % in Taskbar
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "IsBatteryPercentageEnabled" 1
 
+Write-Output `n "Set Dark Mode"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "AppsUseLightTheme" 0
 
+Write-Output `n "Set Dark Theme"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "SystemUsesLightTheme" 0
 
+Write-Output `n "Disable Transparency Effects"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name EnableTransparency -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "EnableTransparency" 0
 
+Write-Output `n "Set Taskbar Alignment"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarAL -PropertyType DWORD -Value 0 -ErrorAction SilentlyContinue -Force     #Set Taskbar to Left (0) or Center (1) (Win 11)
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarAL" 0
 
+Write-Output `n "Set Start Menu To Classic Mode"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name Start_ShowClassicMode -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Start_ShowClassicMode" 1
 
+Write-output `n "Disable Taskbar Thumbnail Previews"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarMn" 0
 
+Write-output `n "Disable Taskbar Flashing"
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarFlashing -Type DWORD -Value 0 -ErrorAction SilentlyContinue -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "TaskbarFlashing" 0
+
+Write-output `n "Show Notification Bell Icon in Taskbar"
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ShowNotificationIcon -Type DWORD -Value 1 -ErrorAction SilentlyContinue -Force
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "ShowNotificationIcon" 1
 
 Write-Output `n "Disabling Copilot"
 New-FolderForced "HKCU:Software\Policies\Microsoft\Windows\WindowsCopilot"
