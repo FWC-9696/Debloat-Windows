@@ -1,5 +1,44 @@
 # Reset all power schemes to system defaults
 powercfg /restoredefaultschemes
+powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
+
+# Ensure the script is running as Administrator
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Warning "This script requires Administrator privileges to modify power registry keys."
+    exit
+}
+
+# Registry path for Windows 11 Power Overlays
+$powerRegPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes"
+
+# Modern Power Mode Overlay GUIDs
+$bestEfficiency  = "961cc777-2547-4f9d-81f5-17dc36c04f90"
+$bestPerformance = "ded574b5-45a0-4f42-8737-46345c09c238"
+
+try {
+    # Set 'Plugged In' (AC) to Best Performance
+    Set-ItemProperty -Path $powerRegPath -Name "ActiveOverlayAcPowerScheme" -Value $bestPerformance -Type String -ErrorAction Stop
+
+    # Set 'On Battery' (DC) to Best Efficiency
+    Set-ItemProperty -Path $powerRegPath -Name "ActiveOverlayDcPowerScheme" -Value $bestEfficiency -Type String -ErrorAction Stop
+
+    Write-Host "Registry overlays updated successfully." -ForegroundColor Cyan
+
+    # Retrieve the current base power plan to trigger a refresh
+    $currentSchemeOutput = powercfg /getactivescheme
+    if ($currentSchemeOutput -match "([a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12})") {
+        $activeGuid = $matches[1]
+        
+        # Re-applying the active base scheme forces Windows to re-read the overlay registry keys instantly
+        powercfg /setactive $activeGuid
+        Write-Host "Power subsystem refreshed. New overlays are active." -ForegroundColor Green
+    } else {
+        Write-Warning "Could not parse current power scheme. You may need to restart the 'Power' service or reboot to apply changes."
+    }
+}
+catch {
+    Write-Error "Failed to update power settings: $_"
+}
 
 #Set Service Host Split Threshold (Reduces System Processes)
 $SvcHostSplit = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1kb
