@@ -11,12 +11,16 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" "VisualFXSetting" 3
 
 Write-Output `n "Fixing Touchpad Options"
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ScrollDirection -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ScrollDirection -Type DWORD -Value 0 -ErrorAction SilentlyContinue
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" "ScrollDirection" 0
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name TapsEnabled -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name TapsEnabled -Type DWORD -Value 1 -ErrorAction SilentlyContinue
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" "TapsEnabled" 1
-New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name ThreeFingerTapEnabled -Value 4
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name MonitorMouseArrival -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name MonitorMouseArrival -Value 0
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name LeaveOnWithMouse -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name LeaveOnWithMouse -Value 0
 
 Write-Output `n "Apply MarkC's mouse acceleration fix"
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" "MouseSensitivity" "10"

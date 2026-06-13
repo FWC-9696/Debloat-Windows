@@ -41,6 +41,8 @@ $services = @(
     "AppXSvc"                                   # Package Install Service
     "Appinfo"                                   # Application Information. acilitates the running of interactive applications with additional administrative privileges.  If this service is stopped, users will be unable to launch applications with the additional administrative privileges they may require to perform desired user tasks.
     "ClipSVC"                                   # Client License Service (ClipSVC). Provides infrastructure support for the Microsoft Store. This service is started on demand and if disabled applications bought using the Microsoft Store will not behave correctly.
+    
+
     )
 foreach ($service in $services) {
     try {
@@ -121,7 +123,7 @@ $services = @(
     "stisvc"                                  #Provides image acquisition services for scanners and cameras
 
     #Special Services for Touch, Bluetooth, & Screen rotation
-    "bthserv"                                   #Bluetooth Support Service
+    #"bthserv"                                   #Bluetooth Support Service
     "TabletInputService"                        #Touch Keyboard and Handwriting Panel Service
     "SensorService"                             #Sensor Service
     "Sensorsrv"                                 #Sensor Data Service
@@ -159,6 +161,17 @@ $services=@(
     "CryptSvc"                   #Cryptographic Service
     "wuauserv"                   #Remote Registry
     "Spooler"                                 #Print Spooler
+
+        #Bluetooth Services
+    "bthserv"                                    #Bluetooth Support Service. Provides support for the discovery and association of Bluetooth devices. If this service is stopped, Bluetooth devices will not function properly and will not be discoverable.
+    "BluetoothUserService_*"
+    "BTAGService"
+    "DeviceAssociationService"
+    "RmSvc"
+    "PlugPlay"
+    "DeviceInstall"
+    "Audiosrv"
+    "AudioEndpointBuilder"
 )
 foreach ($service in $services) {
     try {
