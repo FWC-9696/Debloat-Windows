@@ -1,6 +1,6 @@
 # Reset all power schemes to system defaults
 powercfg /restoredefaultschemes
-powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 
 # Ensure the script is running as Administrator
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -40,27 +40,19 @@ catch {
     Write-Error "Failed to update power settings: $_"
 }
 
-#Set Service Host Split Threshold (Reduces System Processes)
-$SvcHostSplit = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1kb
-Write-Host `n "This computer has $SvcHostSplit KB of physical RAM"
-Write-Host `n "Reducing Idle Processes Count" 
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "SvcHostSplitThresholdInKB" -Value $SvcHostSplit
-
-#Wait to kill services
-Write-Host `n "Changing Kill Service Wait Time" 
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "WaitToKillServiceTimeout" -Value 2000
-
 #Turn off Power Throttling
-Write-Host  `n "Turning off Power Throttling" 
-New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -ErrorAction SilentlyContinue
-New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Name PowerThrottlingOff -Type DWORD -Value 1 -ErrorAction SilentlyContinue
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" "PowerThrottlingOff" -Value 1
+#Write-Host  `n "Turning off Power Throttling" 
+#New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -ErrorAction SilentlyContinue
+#New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" -Name PowerThrottlingOff -Type DWORD -Value 1 -ErrorAction SilentlyContinue
+#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" "PowerThrottlingOff" -Value 1
+
+#While this stops Windows from forcing background apps into a low-power state, it can sometimes cause a strange glitch in older power plans if they aren't fully refreshed
+#locking the minimum state of the active profile to an arbitrary threshold because the OS loses fine-grained stepping control.
 
 #Turn on Power Saver Always on Battery
 Write-Host `n "Turn on Battery Saver"
-powercfg /setdcvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
-powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 0
-powercfg /S SCHEME_CURRENT
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 99
+powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 5
 
 #Set CPU to 100% on AC and Power Saver on Battery
 # --- AC POWER SETTINGS (Plugged In) ---
@@ -69,9 +61,7 @@ powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 100
 powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
 
 # --- DC POWER SETTINGS (On Battery) ---
-# Allow the CPU to drop down to 5% when idle to save power
 powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 5
-# Cap the maximum speed at 85% to prevent heavy battery drain and heat
 powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
 
 # --- UNHIDE PERFORMANCE BOOST MODE IN REGISTRY ---
@@ -79,13 +69,20 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettin
 
 # --- FORCE MAXIMUM FREQUENCY ENGAGEMENT ---
 # AC Power: Force "Aggressive" frequency scaling (Locks at max base/turbo clock)
-powercfg /setacvalueindex SCHEME_CURRENT sub_processor PERFBOOSTMODE 2
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor PERFBOOSTMODE 5
 
 # DC Power (Battery): Set to "Efficient Aggressive" (Allows scaling down on battery)
-powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PERFBOOSTMODE 3
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PERFBOOSTMODE 6
 
-#Turn ON CPU Core Parking
-Write-Host `n "Turn on CPU Core Parking" 
+# --- CONFIGURE CPPC EPP FOR MAXIMUM EFFICIENCY ---
+# AC Power: Absolute raw performance (0)
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor PERFEPP 0
+
+# DC Power (Battery): Absolute maximum power savings (100)
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor PERFEPP 100
+
+#Turn ON CPU Core Parking (Battery)
+Write-Host `n "Turn on CPU Core Parking for battery power" 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" "Attributes" -Value 1
 
 # --- AC POWER: DISABLE CORE PARKING ---
@@ -94,10 +91,7 @@ powercfg /setacvalueindex SCHEME_CURRENT sub_processor CPMINCORES 100
 
 # --- DC POWER (BATTERY): ENABLE CORE PARKING ---
 # Allow the OS to park up to 95% of the cores if the system is idling
-powercfg /setdcvalueindex SCHEME_CURRENT sub_processor CPMINCORES 5
-
-# --- APPLY CHANGES ---
-powercfg /setactive SCHEME_CURRENT
+powercfg /setdcvalueindex SCHEME_CURRENT sub_processor CPMINCORES 0
 
 Write-Host "Core parking explicitly configured: Disabled on AC, Optimized on Battery." -ForegroundColor Green
 
@@ -166,3 +160,14 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory 
 #Write-Host `n "Enable Modern Standby Network Connectivity (Battery Power)"
 #New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "DCSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
 #Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "DCSettingIndex" -Value 1 -Type DWord
+
+#Set Service Host Split Threshold (Reduces System Processes)
+$SvcHostSplit = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1kb
+Write-Host `n "This computer has $SvcHostSplit KB of physical RAM"
+Write-Host `n "Reducing Idle Processes Count" 
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "SvcHostSplitThresholdInKB" -Value $SvcHostSplit
+
+#Wait to kill services
+Write-Host `n "Changing Kill Service Wait Time" 
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" "WaitToKillServiceTimeout" -Value 2000
+Write-Host

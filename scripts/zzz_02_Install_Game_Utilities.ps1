@@ -21,6 +21,7 @@ $apps = @(
     #"ViGEm.ViGEmBus"                 #Nefarius Gamepad Emulator, Subcomponent of DS4Windows
     "MHNexus.HxD"                      #Hex editor
     "FlawlessWidescreen.FlawlessWidescreen" FlawlessWidescreen
+    #"CloudImperiumGames.RSILauncher"   #RSI Launcher
 )
 
 foreach ($app in $apps) {

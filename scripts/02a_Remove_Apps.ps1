@@ -47,7 +47,6 @@ $apps = @(
     "Microsoft.Xbox.TCUI"
     #"Microsoft.GamingApp"           #Xbox App
     "Microsoft.XboxApp"             #Xbox Console Companion. Need this on Win 11 to check Xbox Network Status.
-    "Microsoft.XboxGamingOverlay"   #Xbox Game Bar
     "Microsoft.YourPhone"
     "Microsoft.ZuneMusic"
     "Microsoft.ZuneVideo"
@@ -195,9 +194,9 @@ Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUse
 #Uninstall more stuff using WinGet
 
 #winget uninstall 9WZDNCRD1HKW #XboxIdentityProvider
-winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
-winget uninstall 9NBLGGH537C2 #Xbox Game Bar Plugin
-winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
+#winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
+#winget uninstall 9NBLGGH537C2 #Xbox Game Bar Plugin
+#winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
 
 winget uninstall 9NZBF4GT040C #Web Search from Microsoft Bing
 winget uninstall 9NTXGKQ8P7N0 #Cross Device Experience Host
@@ -208,6 +207,7 @@ winget uninstall 9WZDNCRD29V9 #Microsoft Copilot 365 App
 winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widgets.***
 winget uninstall 9PLJQ12FQ3CV #WinAppRuntime.Main.1.8
 winget uninstall 9P5Z076K079H #WinAppRuntime.Singleton
+winget uninstall 9NRZT3Q9R3DL #WindowsAppRuntime.2
 
 #winget uninstall 9WZDNCRFHVN5 #Calculator
 #winget uninstall XPFFZHVGQWWLHB #OneNote. Can hang or take a while.
@@ -329,12 +329,13 @@ Write-Host `n
 
 ###Reinstall some apps
 winget install 9WZDNCRFHVN5 --accept-source-agreements --accept-package-agreements #Calculator
-#winget install 9WZDNCRFJBH4 --accept-source-agreements --accept-package-agreements #Photos. Has AI, but still unfortunately best way to trim video
+winget install 9WZDNCRFJBH4 --accept-source-agreements --accept-package-agreements #Photos. Has AI, but still unfortunately best way to trim video
 #winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 #winget install 9MV0B5HZVK9Z --accept-source-agreements --accept-package-agreements #Xbox, will get reinstalled automatically
 winget install 9WZDNCRD1HKW --accept-source-agreements --accept-package-agreements #reinstall XboxIdentityProvider
 #winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox TCUI
 #winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
+winget install 9NZKPSTSNW4P --accept-source-agreements --accept-package-agreements #reinstall Xbox Game Bar
 
 ###Remove Remote Desktop Connection
 Write-Host "Remove Remote Desktop Connection"

@@ -147,6 +147,9 @@ Write-Host ""
 Stop-Process -Name perfmon -ErrorAction SilentlyContinue -Force
 Invoke-Expression "$env:windir\system32\perfmon.exe /res"
 
+#Reset Power Plans according to Resource Tweaks Script
+& pwsh.exe -File $Directory\02d_Resource_Tweaks.ps1
+
 #Uninstall WebView2
 & pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
 
