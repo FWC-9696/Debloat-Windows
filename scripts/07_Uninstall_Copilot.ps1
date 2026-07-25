@@ -57,7 +57,7 @@ if ($targetPath) {
 
     # 4. Move to Recycle Bin via Shell COM Object
     New-Item -ItemType Directory -Path $env:systemdrive\Windows.old\$random -ErrorAction SilentlyContinue
-    Move-Item -Path $folderPattern -Destination "$env:systemdrive\Windows.old\$random" -Force
+    Move-Item -Path $folderPattern -Destination "$env:systemdrive\Windows.old\$random" -Force -ErrorAction SilentlyContinue
     #Remove-Item "$env:windir\Temp\*" -Recurse -Force
     Write-Host "Core AI Folder removed." -ForegroundColor Green
 
@@ -81,5 +81,8 @@ foreach ($app in $apps) {
         Remove-AppxProvisionedPackage -Online
 }
 }
-
+Write-Host ""
+#winget uninstall 9NHT9RB2F4HD
+Write-Host ""
 Write-Host "Copilot & AI features removed" -ForegroundColor Green
+Write-Host ""

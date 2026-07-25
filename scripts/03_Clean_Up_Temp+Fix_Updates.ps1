@@ -39,5 +39,13 @@ Write-Host "Launching Disk Cleanup..." `n
 
 Start-Process "$env:windir\system32\cleanmgr.exe" -Verb RunAs
 
+Write-Host "Cleaning up Gigabyte Control Center downloads (if installed)..."
+try {
+    Remove-Item -Path "C:\Program Files\GIGABYTE\Control Center\Lib\Download\*" -Recurse -Force -ErrorAction Continue
+}
+catch {
+    Write-Host "GCC not installed or another error has occured."
+}
+Write-Host ""
 Write-Host "Done. Unpause updates in settings." `n
 Start-Process ms-settings:windowsupdate
