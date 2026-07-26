@@ -82,7 +82,7 @@ foreach ($app in $apps) {
 }
 }
 Write-Host ""
-#winget uninstall 9NHT9RB2F4HD
+winget uninstall 9NHT9RB2F4HD
 Write-Host ""
 Write-Host "Copilot & AI features removed" -ForegroundColor Green
 Write-Host ""
