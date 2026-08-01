@@ -1,4 +1,5 @@
 Stop-Process -Name *WebView* -Force
+Remove-Item "HKLMSOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" -Force -ErrorAction SilentlyContinue
 if (Test-Path ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView) {
    try {
     Remove-Item -Recurse -Force ${env:ProgramFiles(x86)}\Microsoft\EdgeWebView

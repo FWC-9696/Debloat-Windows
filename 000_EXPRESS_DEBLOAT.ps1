@@ -13,7 +13,7 @@ $Directory = Split-Path -Path $Path -Parent
 & pwsh.exe -File $Directory\scripts\02e_GCC_Norton_Fix.ps1
 & pwsh.exe -File $Directory\scripts\04_Hosts_File.ps1
 & pwsh.exe -File $Directory\scripts\05_Digital_Marketplace.ps1
-& pwsh.exe -File $Directory\scripts\06_Uninstall_WebView2.ps1
+#& pwsh.exe -File $Directory\scripts\06_Uninstall_WebView2.ps1
 & pwsh.exe -File $Directory\scripts\07_Uninstall_Copilot.ps1
 & pwsh.exe -File $Directory\scripts\OOO_Options.ps1
 #& pwsh.exe -File $Directory\scripts\01a_Optimize_UI_New.ps1

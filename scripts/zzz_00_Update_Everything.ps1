@@ -151,7 +151,7 @@ Invoke-Expression "$env:windir\system32\perfmon.exe /res"
 & pwsh.exe -File $Directory\02d_Resource_Tweaks.ps1
 
 #Uninstall WebView2
-& pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
+#& pwsh.exe -File $Directory\06_Uninstall_WebView2.ps1
 
 #Uninstall Copilot
 & pwsh.exe -File $Directory\07_Uninstall_Copilot.ps1
