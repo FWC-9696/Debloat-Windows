@@ -193,70 +193,70 @@ Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUse
 
 #Uninstall more stuff using WinGet
 
-#winget uninstall 9WZDNCRD1HKW #XboxIdentityProvider
-#winget uninstall 9WZDNCRFJBD8 #Xbox Console Companion
-#winget uninstall 9NBLGGH537C2 #Xbox Game Bar Plugin
-#winget uninstall 9NZKPSTSNW4P #Xbox Game Bar
+#winget uninstall 9WZDNCRD1HKW --accept-source-agreements #XboxIdentityProvider
+#winget uninstall 9WZDNCRFJBD8 --accept-source-agreements #Xbox Console Companion
+#winget uninstall 9NBLGGH537C2 --accept-source-agreements #Xbox Game Bar Plugin
+#winget uninstall 9NZKPSTSNW4P --accept-source-agreements #Xbox Game Bar
 
-winget uninstall 9NZBF4GT040C #Web Search from Microsoft Bing
-winget uninstall 9NTXGKQ8P7N0 #Cross Device Experience Host
-winget uninstall 9N3RK8ZV2ZR8 #Widgets Platform Runtime
-winget uninstall 9PCSD6N03BKV #Windows Application Compatiblility Enhancements (WACE)
-winget uninstall 9NHT9RB2F4HD #Microsoft Copilot App
-winget uninstall 9WZDNCRD29V9 #Microsoft Copilot 365 App
-winget uninstall 9MSSGKG348SP #Windows Web Experience Pack ***Will Disable widgets.***
-winget uninstall 9PLJQ12FQ3CV #WinAppRuntime.Main.1.8
-winget uninstall 9P5Z076K079H #WinAppRuntime.Singleton
-winget uninstall 9NRZT3Q9R3DL #WindowsAppRuntime.2
+winget uninstall 9NZBF4GT040C --accept-source-agreements #Web Search from Microsoft Bing
+winget uninstall 9NTXGKQ8P7N0 --accept-source-agreements #Cross Device Experience Host
+winget uninstall 9N3RK8ZV2ZR8 --accept-source-agreements #Widgets Platform Runtime
+winget uninstall 9PCSD6N03BKV --accept-source-agreements #Windows Application Compatiblility Enhancements (WACE)
+winget uninstall 9NHT9RB2F4HD --accept-source-agreements #Microsoft Copilot App
+winget uninstall 9WZDNCRD29V9 --accept-source-agreements #Microsoft Copilot 365 App
+winget uninstall 9MSSGKG348SP --accept-source-agreements #Windows Web Experience Pack ***Will Disable widgets.***
+winget uninstall 9PLJQ12FQ3CV --accept-source-agreements #WinAppRuntime.Main.1.8
+winget uninstall 9P5Z076K079H --accept-source-agreements #WinAppRuntime.Singleton
+winget uninstall 9NRZT3Q9R3DL --accept-source-agreements #WindowsAppRuntime.2
 
-#winget uninstall 9WZDNCRFHVN5 #Calculator
-#winget uninstall XPFFZHVGQWWLHB #OneNote. Can hang or take a while.
-winget uninstall 9NRX63209R7B #Outlook
-winget uninstall 9NFTCH6J7FHV #Power Automate
-winget uninstall 9PC1H9VN18CM #Start Experiences App, which keeps messing with the Start Menu Layout
-winget uninstall 9NC184TX90WZ #AI Handwriting Tool Ink.Handwriting
-winget uninstall 9MSMLRH6LZF3 #Notepad
-winget uninstall 9PCFS5B6T72H #Paint
-#winget uninstall 9WZDNCRFJBH4 #Photos
-#winget uninstall 9MZ95KL8MR0L #Snipping Tool
-winget uninstall 9WZDNCRFHWD2 #Solitaire
-winget uninstall 9PF3QC8DVGVD #English Speech Pack
+#winget uninstall 9WZDNCRFHVN5 --accept-source-agreements #Calculator
+#winget uninstall XPFFZHVGQWWLHB --accept-source-agreements #OneNote. Can hang or take a while.
+winget uninstall 9NRX63209R7B --accept-source-agreements #Outlook
+winget uninstall 9NFTCH6J7FHV --accept-source-agreements #Power Automate
+winget uninstall 9PC1H9VN18CM --accept-source-agreements #Start Experiences App, which keeps messing with the Start Menu Layout
+winget uninstall 9NC184TX90WZ --accept-source-agreements #AI Handwriting Tool Ink.Handwriting
+winget uninstall 9MSMLRH6LZF3 --accept-source-agreements #Notepad
+winget uninstall 9PCFS5B6T72H --accept-source-agreements #Paint
+#winget uninstall 9WZDNCRFJBH4 --accept-source-agreements #Photos
+#winget uninstall 9MZ95KL8MR0L --accept-source-agreements #Snipping Tool
+winget uninstall 9WZDNCRFHWD2 --accept-source-agreements #Solitaire
+winget uninstall 9PF3QC8DVGVD --accept-source-agreements #English Speech Pack
 
 
 #Uninstall Image & Video Extensions
-winget uninstall 9NCTDW2W1BH8 #Raw Image Extension
-winget uninstall 9PG2DK419DRG #Webp Image Extension
-winget uninstall 9PMMSR1CGPWG #HEIF Image Extension
-winget uninstall 9N5TDP8VCMHS #Web Media Extension
-winget uninstall 9N4D0MSMP0PT #VP9 Video Extension
-winget uninstall 9PB0TRCNRHFX #AVC Video Extension
-winget uninstall 9N4WGH0Z6VHQ #HVEC Video Extension
-winget uninstall 9N95Q1ZZPMH4 #MPEG-2 Video Extension (Has issues updating; can be reinstalled)
-winget uninstall 9MVZQVXJBQ9V #AV1 Video Extension
+winget uninstall 9NCTDW2W1BH8 --accept-source-agreements #Raw Image Extension
+winget uninstall 9PG2DK419DRG --accept-source-agreements #Webp Image Extension
+winget uninstall 9PMMSR1CGPWG --accept-source-agreements #HEIF Image Extension
+winget uninstall 9N5TDP8VCMHS --accept-source-agreements #Web Media Extension
+winget uninstall 9N4D0MSMP0PT --accept-source-agreements #VP9 Video Extension
+winget uninstall 9PB0TRCNRHFX --accept-source-agreements #AVC Video Extension
+winget uninstall 9N4WGH0Z6VHQ --accept-source-agreements #HVEC Video Extension
+winget uninstall 9N95Q1ZZPMH4 --accept-source-agreements #MPEG-2 Video Extension (Has issues updating; can be reinstalled)
+winget uninstall 9MVZQVXJBQ9V --accept-source-agreements #AV1 Video Extension
 
 #3rd party stuff using WinGet
-winget uninstall 9WZDNCRFJ0PK #Dropbox Lite
-winget uninstall 9NBLGGH537BP #Apps Explorer
-winget uninstall 9N12Z3CCTCNZ #Alexa
-winget uninstall 9WZDNCRFJ3MB #Evernote
-winget uninstall 9WZDNCRFJ3WL #Hearts Deluxe
-winget uninstall 9WZDNCRDKRDS #Simple Mahjong
-winget uninstall 9WZDNCRFJ3TT #Simple Solitaire
-winget uninstall 9WZDNCRDKRDT #Simple Spider Solitaire
-winget uninstall 9WZDNCRFJ3GM #Spades
-winget uninstall 9NKSQGP7F2NH #WhatsApp
-winget uninstall 9NCBCSZSJRSB #Spotify
-winget uninstall 9P1J8S7CCWWT #ClipChamp
-winget uninstall 9WZDNCRFJ4Q7 #Linkedin
-winget uninstall 9N8MHTPHNGVV #Dev Home
-winget uninstall 9NZCC27PR6N6 #Dev Home Github Extension
-winget uninstall 9P7JQGL6GC8P #Luminar Neo AI Photo Editor
-winget uninstall 9PL59F1G4XSZ #Linkedin
-winget uninstall 9PGM3QB3PDRD #Camo Studio
-winget uninstall XPDDXX9QW8N9D7 #Grammarly
-winget uninstall ExpressVPN #ExpressVPN
-winget uninstall 9N2F0P0166HF #PDF Editor & Converter
-winget uninstall 9N0H1M8J1308 #DTS Ultra
+winget uninstall 9WZDNCRFJ0PK --accept-source-agreements #Dropbox Lite
+winget uninstall 9NBLGGH537BP --accept-source-agreements #Apps Explorer
+winget uninstall 9N12Z3CCTCNZ --accept-source-agreements #Alexa
+winget uninstall 9WZDNCRFJ3MB --accept-source-agreements #Evernote
+winget uninstall 9WZDNCRFJ3WL --accept-source-agreements #Hearts Deluxe
+winget uninstall 9WZDNCRDKRDS --accept-source-agreements #Simple Mahjong
+winget uninstall 9WZDNCRFJ3TT --accept-source-agreements #Simple Solitaire
+winget uninstall 9WZDNCRDKRDT --accept-source-agreements #Simple Spider Solitaire
+winget uninstall 9WZDNCRFJ3GM --accept-source-agreements #Spades
+winget uninstall 9NKSQGP7F2NH --accept-source-agreements #WhatsApp
+winget uninstall 9NCBCSZSJRSB --accept-source-agreements #Spotify
+winget uninstall 9P1J8S7CCWWT --accept-source-agreements #ClipChamp
+winget uninstall 9WZDNCRFJ4Q7 --accept-source-agreements #Linkedin
+winget uninstall 9N8MHTPHNGVV --accept-source-agreements #Dev Home
+winget uninstall 9NZCC27PR6N6 --accept-source-agreements #Dev Home Github Extension
+winget uninstall 9P7JQGL6GC8P --accept-source-agreements #Luminar Neo AI Photo Editor
+winget uninstall 9PL59F1G4XSZ --accept-source-agreements #Linkedin
+winget uninstall 9PGM3QB3PDRD --accept-source-agreements #Camo Studio
+winget uninstall XPDDXX9QW8N9D7 --accept-source-agreements #Grammarly
+winget uninstall ExpressVPN --accept-source-agreements #ExpressVPN
+winget uninstall 9N2F0P0166HF --accept-source-agreements #PDF Editor & Converter
+winget uninstall 9N0H1M8J1308 --accept-source-agreements #DTS Ultra
 
 #Remove shortcuts
 $shortcuts = @(
@@ -318,13 +318,13 @@ foreach($name in $names){
     New-ItemProperty -Path "HKLM:\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" -Name $name -PropertyType String -Value "PhotoViewer.FileAssoc.Tiff" -ErrorAction SilentlyContinue
 }
 Write-Host "Uninstall Desktop Teams, if Present"
-winget uninstall Microsoft.Teams.Free
+winget uninstall Microsoft.Teams.Free --accept-source-agreements
 Write-Host `n
 Write-Host "Remove Cortana"
-winget uninstall 9NFFX4SZZ23L
+winget uninstall 9NFFX4SZZ23L --accept-source-agreements
 Write-Host `n
 Write-Host "Remove Cross-Device Experience Host"
-winget uninstall 9NTXGKQ8P7N0
+winget uninstall 9NTXGKQ8P7N0 --accept-source-agreements
 Write-Host `n
 
 ###Reinstall some apps
