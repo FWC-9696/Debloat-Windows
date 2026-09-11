@@ -21,6 +21,8 @@ Stop-Service -Name "wuauserv","BITS" -Force
 
 Get-Service -Name "wuauserv","BITS" | Format-Table -AutoSize | Out-Host
 
+Start-Sleep 3
+
 Write-Host "Removing System Files..." `n
 
 $directory = @(
@@ -29,7 +31,8 @@ $directory = @(
     )
 
     foreach ($directory in $directory) {
-    Remove-Item $directory -Recurse -Force -ErrorAction Continue
+    #Remove-Item $directory -Recurse -Force -ErrorAction Continue <-- Fails on many nested files.
+    cmd.exe /c rd /s /q "$directory"
     }
 Write-Host ""
 Write-Host "If you encountered errors deleting files, remove $env:windir\SoftwareDistribution manually." `n
