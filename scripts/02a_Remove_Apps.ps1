@@ -215,7 +215,7 @@ winget uninstall 9NRX63209R7B --accept-source-agreements #Outlook
 winget uninstall 9NFTCH6J7FHV --accept-source-agreements #Power Automate
 winget uninstall 9PC1H9VN18CM --accept-source-agreements #Start Experiences App, which keeps messing with the Start Menu Layout
 winget uninstall 9NC184TX90WZ --accept-source-agreements #AI Handwriting Tool Ink.Handwriting
-winget uninstall 9MSMLRH6LZF3 --accept-source-agreements #Notepad
+#winnget uninstall 9MSMLRH6LZF3 --accept-source-agreements #Notepad
 winget uninstall 9PCFS5B6T72H --accept-source-agreements #Paint
 #winget uninstall 9WZDNCRFJBH4 --accept-source-agreements #Photos
 #winget uninstall 9MZ95KL8MR0L --accept-source-agreements #Snipping Tool

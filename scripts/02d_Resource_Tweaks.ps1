@@ -56,8 +56,8 @@ powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 5
 
 #Set CPU to 100% on AC and Power Saver on Battery
 # --- AC POWER SETTINGS (Plugged In) ---
-# Set Minimum and Maximum Processor State to 100%
-powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 100
+# Revised to remove processor lock to 100% on AC power, allowing for dynamic scaling based on workload. Locking to 100% is not recommended for modern CPUs as it can lead to unnecessary heat and power consumption.
+powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMIN 5
 powercfg /setacvalueindex SCHEME_CURRENT sub_processor PROCTHROTTLEMAX 100
 
 # --- DC POWER SETTINGS (On Battery) ---
@@ -94,6 +94,16 @@ powercfg /setacvalueindex SCHEME_CURRENT sub_processor CPMINCORES 100
 powercfg /setdcvalueindex SCHEME_CURRENT sub_processor CPMINCORES 0
 
 Write-Host "Core parking explicitly configured: Disabled on AC, Optimized on Battery." -ForegroundColor Green
+
+#Set the lid close to "Do Nothing" on AC
+$subGroup = "4f971e89-eebd-4455-a8de-9e59040e7347"
+$setting  = "5ca83367-6e45-459f-a27b-476b1d01c936"
+
+# Action Value: 0 = Do nothing, 1 = Sleep, 2 = Hibernate, 3 = Shut down
+$actionValue = 0
+
+powercfg /setacvalueindex SCHEME_CURRENT $subGroup $setting $actionValue
+powercfg /setdcvalueindex SCHEME_CURRENT $subGroup $setting $actionValue
 
 # --- APPLY CHANGES ---
 # Refresh the power subsystem to make the changes take effect immediately
