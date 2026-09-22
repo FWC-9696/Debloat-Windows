@@ -100,6 +100,13 @@ catch {
 #Start-Process ${env:ProgramFiles(x86)}\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe
 #Write-Host
 
+Write-Host "Checking for Edge Updates..." -ForegroundColor DarkCyan
+try {
+   Start-Process msedge; Start-Sleep -s 1; $ws = New-Object -ComObject WScript.Shell; $ws.SendKeys("^l"); Start-Sleep -m 200; $ws.SendKeys("edge://settings/help~")
+}
+catch {
+    "Could Not Start Edge"
+}
 #Write-Host "Checking for Firefox Updates in the background..."
 #try {Start-Process $env:ProgramFiles\Firefox*\updater.exe}
 #catch{Write-Host "Firefox is not installed."}
