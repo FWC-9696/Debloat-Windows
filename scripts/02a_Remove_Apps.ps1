@@ -44,7 +44,7 @@ $apps = @(
     "Microsoft.WindowsMaps"
     "Microsoft.WindowsPhone"
     "Microsoft.WindowsSoundRecorder"
-    "Microsoft.Xbox.TCUI"
+    #"Microsoft.Xbox.TCUI"
     #"Microsoft.GamingApp"           #Xbox App
     "Microsoft.XboxApp"             #Xbox Console Companion. Need this on Win 11 to check Xbox Network Status.
     "Microsoft.YourPhone"
