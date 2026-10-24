@@ -171,6 +171,35 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory 
 #New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" -Name "DCSettingIndex" -Value 1 -Type DWord -ErrorAction SilentlyContinue -Force
 #Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9" "DCSettingIndex" -Value 1 -Type DWord
 
+###Stop Mouse from waking computer
+# Ensure the script is running with Administrator privileges
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Error "Please right-click PowerShell and select 'Run as administrator' before running this script."
+    exit
+}
+# Query all devices currently armed to wake the system
+$armedDevices = powercfg /devicequery wake_armed
+if (-not $armedDevices) {
+    Write-Host "No devices are currently set to wake the computer." -ForegroundColor Green
+    return
+}
+Write-Host "Currently armed wake devices found:" -ForegroundColor Cyan
+$armedDevices
+# Target and disable mouse/pointing devices
+$disabledCount = 0
+foreach ($device in $armedDevices) {
+    if ($device -match "mouse|pointer|keyboard") {
+        Write-Host "Disabling wake capability for: $device" -ForegroundColor Yellow
+        powercfg /devicedisablewake "$device"
+        $disabledCount++
+    }
+}
+if ($disabledCount -gt 0) {
+    Write-Host "`nSuccessfully disabled wake for $disabledCount mouse device(s)!" -ForegroundColor Green
+} else {
+    Write-Host "`nNo matching mouse devices found in the active wake list. Check the full list above if your mouse has a custom name." -ForegroundColor DarkYellow
+}
+
 #Set Service Host Split Threshold (Reduces System Processes)
 $SvcHostSplit = (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1kb
 Write-Host `n "This computer has $SvcHostSplit KB of physical RAM"
