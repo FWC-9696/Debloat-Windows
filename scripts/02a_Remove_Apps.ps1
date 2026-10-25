@@ -200,7 +200,7 @@ Get-AppxPackage -AllUsers Microsoft.Edge.GameAssist | Remove-AppxPackage -AllUse
 
 winget uninstall 9NZBF4GT040C --accept-source-agreements #Web Search from Microsoft Bing
 winget uninstall 9NTXGKQ8P7N0 --accept-source-agreements #Cross Device Experience Host
-winget uninstall 9N3RK8ZV2ZR8 --accept-source-agreements #Widgets Platform Runtime
+#winget uninstall 9N3RK8ZV2ZR8 --accept-source-agreements #Widgets Platform Runtime
 winget uninstall 9PCSD6N03BKV --accept-source-agreements #Windows Application Compatiblility Enhancements (WACE)
 winget uninstall 9NHT9RB2F4HD --accept-source-agreements #Microsoft Copilot App
 winget uninstall 9WZDNCRD29V9 --accept-source-agreements #Microsoft Copilot 365 App
@@ -330,13 +330,13 @@ Write-Host `n
 ###Reinstall some apps
 winget install 9WZDNCRFHVN5 --accept-source-agreements --accept-package-agreements #Calculator
 winget install 9WZDNCRFJBH4 --accept-source-agreements --accept-package-agreements #Photos. Has AI, but still unfortunately best way to trim video
-winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
+#winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 #winget install 9MV0B5HZVK9Z --accept-source-agreements --accept-package-agreements #Xbox, will get reinstalled automatically
 winget install 9WZDNCRD1HKW --accept-source-agreements --accept-package-agreements #reinstall XboxIdentityProvider
 winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox Live in-game experience (Formerly Xbox TCUI)
 winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
 winget install 9NZKPSTSNW4P --accept-source-agreements --accept-package-agreements #reinstall Xbox Game Bar
-winget install 9N3RK8ZV2ZR8 --accept-source-agreements --accept-package-agreements #reinstall Widgets Platform Runtime
+#winget install 9N3RK8ZV2ZR8 --accept-source-agreements --accept-package-agreements #reinstall Widgets Platform Runtime
 
 ###Remove Remote Desktop Connection
 Write-Host "Remove Remote Desktop Connection"
