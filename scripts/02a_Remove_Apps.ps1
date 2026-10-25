@@ -330,12 +330,13 @@ Write-Host `n
 ###Reinstall some apps
 winget install 9WZDNCRFHVN5 --accept-source-agreements --accept-package-agreements #Calculator
 winget install 9WZDNCRFJBH4 --accept-source-agreements --accept-package-agreements #Photos. Has AI, but still unfortunately best way to trim video
-#winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
+winget install 9MSSGKG348SP --accept-source-agreements --accept-package-agreements #reinstall Windows Web Experience Pack
 #winget install 9MV0B5HZVK9Z --accept-source-agreements --accept-package-agreements #Xbox, will get reinstalled automatically
 winget install 9WZDNCRD1HKW --accept-source-agreements --accept-package-agreements #reinstall XboxIdentityProvider
 winget install 9NKNC0LD5NN6 --accept-source-agreements --accept-package-agreements #reinstall Xbox Live in-game experience (Formerly Xbox TCUI)
 winget install 9MWPM2CQNLHN --accept-source-agreements --accept-package-agreements #reinstall Xbox Gaming Services
 winget install 9NZKPSTSNW4P --accept-source-agreements --accept-package-agreements #reinstall Xbox Game Bar
+winget install 9N3RK8ZV2ZR8 --accept-source-agreements --accept-package-agreements #reinstall Widgets Platform Runtime
 
 ###Remove Remote Desktop Connection
 Write-Host "Remove Remote Desktop Connection"
